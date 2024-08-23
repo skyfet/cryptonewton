@@ -1,19 +1,9 @@
 import 'package:cryptonewton/components/color_picker_dialog.dart';
-import 'package:cryptonewton/screens/buttons/back_button_screen.dart';
-import 'package:cryptonewton/screens/buttons/main_button_screen.dart';
-import 'package:cryptonewton/screens/buttons/settings_button_screen.dart';
-import 'package:cryptonewton/screens/other/biometric_manager_screen.dart';
-import 'package:cryptonewton/screens/other/cloud_storage_screen.dart';
+
 import 'package:cryptonewton/screens/util/string_snackbar_extension.dart';
-import 'package:cryptonewton/widgets/expandable_tile.dart';
-import 'package:cryptonewton/widgets/expandable_tile_with_widget.dart';
 import 'package:cryptonewton/widgets/list_button.dart';
-import 'package:cryptonewton/widgets/one_color_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:telegram_web_app/telegram_web_app.dart';
-
-import '../widgets/theme_params_widget.dart';
-import 'other/haptic_feedback_screen.dart';
 
 // ignore_for_file: use_build_context_synchronously
 class MainScreen extends StatefulWidget {
@@ -30,135 +20,36 @@ class _MainScreenState extends State<MainScreen> {
   String? clipboardText;
 
   @override
-  void initState() {
-    super.initState();
-    // FlutterError.onError = (details) {
-    //   if (mounted) {
-    //     showSnackbar("Flutter error: $details");
-    //     print("Flutter error happened: $details");
-    //   }
-    // };
-
-    TelegramWebApp.instance.ready();
-
-    check();
-  }
-
-  void check() async {
-    await Future.delayed(const Duration(seconds: 2));
-    isDefinedVersion = await telegram.isVersionAtLeast('Bot API 6.1');
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: telegram.backgroundColor,
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: [
-          ListButton('Expand', onPress: telegram.expand),
-          InfoExpandableTile(
-            'Init Data',
-            telegram.initData.toString(),
-          ),
-          InfoExpandableTile(
-            'Init Data Unsafe',
-            telegram.initDataUnsafe?.toReadableString() ?? 'null',
-          ),
-          InfoExpandableTile(
-            'isVerticalSwipesEnabled',
-            telegram.isVerticalSwipesEnabled.toString(),
-          ),
-          ListButton('enableVerticalSwipes', onPress: telegram.enableVerticalSwipes),
-          ListButton('disableVerticalSwipes', onPress: telegram.disableVerticalSwipes),
-          InfoExpandableTile('Version', telegram.version),
-          InfoExpandableTile('Platform', telegram.platform),
-          InfoExpandableTile('Color Scheme', telegram.colorScheme.name),
-          ThemeParamsWidget(telegram.themeParams),
-          InfoExpandableTile('isExpanded', telegram.isExpanded.toString()),
-          InfoExpandableTile('viewportHeight', telegram.viewportHeight.toString()),
-          InfoExpandableTile('viewportStableHeight', telegram.viewportStableHeight.toString()),
-          OneColorExpandableTile('headerColor', telegram.headerColor),
-          OneColorExpandableTile('backgroundColor', telegram.backgroundColor),
-          InfoExpandableTileWithWidget(
-            'Closing confirmation',
-            expanded: false,
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('isClosingConfirmationEnabled'),
-                  const SizedBox(height: 8),
-                  Text(telegram.isClosingConfirmationEnabled.toString(),
-                      style: const TextStyle(fontSize: 16)),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                          onPressed: () async {
-                            await telegram.enableClosingConfirmation();
-                            setState(() {});
-                          },
-                          child: const Text('Enable')),
-                      const SizedBox(width: 16),
-                      ElevatedButton(
-                          onPressed: () async {
-                            await telegram.disableClosingConfirmation();
-                            setState(() {});
-                          },
-                          child: const Text('Disable')),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ListButton(
-            'BackButton',
-            onPress: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const BackButtonScreen()));
-            },
-          ),
-          ListButton(
-            'MainButton',
-            onPress: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const MainButtonScreen()));
-            },
-          ),
-          ListButton(
-            'SettingsButton',
-            onPress: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const SettingsButtonScreen()));
-            },
-          ),
-          ListButton(
-            'HapticFeedback',
-            onPress: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const HapticFeedbackScreen()));
-            },
-          ),
-          ListButton(
-            'CloudStorage',
-            onPress: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const CloudStorageScreen()));
-            },
-          ),
-          ListButton(
-            'BiometricsManager',
-            onPress: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const BiometricManagerScreen()));
-            },
-          ),
-          InfoExpandableTile('isVersionAtLeast(6.1)', isDefinedVersion.toString()),
+          // ListButton('Expand', onPress: telegram.expand),
+          // InfoExpandableTile(
+          //   'Init Data',
+          //   telegram.initData.toString(),
+          // ),
+          // InfoExpandableTile(
+          //   'Init Data Unsafe',
+          //   telegram.initDataUnsafe?.toReadableString() ?? 'null',
+          // ),
+          // InfoExpandableTile(
+          //   'isVerticalSwipesEnabled',
+          //   telegram.isVerticalSwipesEnabled.toString(),
+          // ),
+          // ListButton('enableVerticalSwipes', onPress: telegram.enableVerticalSwipes),
+          // ListButton('disableVerticalSwipes', onPress: telegram.disableVerticalSwipes),
+          // InfoExpandableTile('Version', telegram.version),
+          // InfoExpandableTile('Platform', telegram.platform),
+          // InfoExpandableTile('Color Scheme', telegram.colorScheme.name),
+          // InfoExpandableTile('isExpanded', telegram.isExpanded.toString()),
+          // InfoExpandableTile('viewportHeight', telegram.viewportHeight.toString()),
+          // InfoExpandableTile('viewportStableHeight', telegram.viewportStableHeight.toString()),
+          // OneColorExpandableTile('headerColor', telegram.headerColor),
+          // OneColorExpandableTile('backgroundColor', telegram.backgroundColor),
+          // InfoExpandableTile('isVersionAtLeast(6.1)', isDefinedVersion.toString()),
           ListButton(
             'setHeaderColor(color)',
             onPress: () async {
