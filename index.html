@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payterminal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: #0077ff;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.5rem;
+        }
+        .container {
+            padding: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .card:hover {
+            background-color: #e0e0e0;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #0077ff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .secondary-icons img {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .secondary-icons img:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Payterminal</div>
+    <div id="app">
+        <!-- Контент загружается динамически -->
+    </div>
+
+    <script>
+        const app = document.getElementById('app');
+
+        const games = [
+            { id: 'ml', name: 'Mobile Legends', products: ['100 Diamonds', '200 Diamonds', '500 Diamonds'] },
+            { id: 'cod', name: 'Call of Duty', products: ['Battle Pass', 'Weapon Skin'] },
+            { id: 'pubg', name: 'PUBG Mobile', products: ['UC 100', 'UC 300', 'UC 600'] }
+        ];
+
+        function renderHome() {
+            app.innerHTML = `
+                <div class="container">
+                    <h2 class="section-title">Топ пополнений</h2>
+                    <div class="grid">
+                        <div class="card">Mobile Legends: 100 Diamonds</div>
+                        <div class="card">PUBG: UC 300</div>
+                        <div class="card">Call of Duty: Battle Pass</div>
+                    </div>
+                    <h2 class="section-title">Последние пополнения</h2>
+                    <div class="grid">
+                        <div class="card">Mobile Legends: 500 Diamonds</div>
+                        <div class="card">PUBG: UC 600</div>
+                        <div class="card">Call of Duty: Weapon Skin</div>
+                    </div>
+                    <h2 class="section-title">Пополнение Mobile Legends</h2>
+                    <div class="card" onclick="renderGamePage('ml')">Mobile Legends</div>
+                    <h2 class="section-title">Другие игры</h2>
+                    <div class="secondary-icons">
+                        ${games
+                            .filter(game => game.id !== 'ml')
+                            .map(game => `<img src="https://via.placeholder.com/50?text=${game.name}" alt="${game.name}" onclick="renderGamePage('${game.id}')">`)
+                            .join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGamePage(gameId) {
+            const game = games.find(g => g.id === gameId);
+            app.innerHTML = `
+                <div class="container">
+                    <h2 class="section-title">${game.name}</h2>
+                    <div class="grid">
+                        ${game.products.map(product => `<div class="card">${product}</div>`).join('')}
+                    </div>
+                    <button onclick="renderHome()">Назад</button>
+                </div>
+            `;
+        }
+
+        renderHome();
+    </script>
+</body>
+</html>
