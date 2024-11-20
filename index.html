@@ -55,6 +55,38 @@
         .secondary-icons img:hover {
             transform: scale(1.2);
         }
+        .grid-columns {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #0077ff;
+            color: white;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -67,36 +99,82 @@
         const app = document.getElementById('app');
 
         const games = [
-            { id: 'ml', name: 'Mobile Legends', products: ['100 Diamonds', '200 Diamonds', '500 Diamonds'] },
+            { id: 'ml', name: 'Mobile Legends', products: ['100 Diamonds', '200 Diamonds', '500 Diamonds', 'Сезонный пропуск'] },
             { id: 'cod', name: 'Call of Duty', products: ['Battle Pass', 'Weapon Skin'] },
             { id: 'pubg', name: 'PUBG Mobile', products: ['UC 100', 'UC 300', 'UC 600'] }
         ];
 
         function renderHome() {
             app.innerHTML = `
-                <div class="container">
-                    <h2 class="section-title">Топ пополнений</h2>
-                    <div class="grid">
-                        <div class="card">Mobile Legends: 100 Diamonds</div>
-                        <div class="card">PUBG: UC 300</div>
-                        <div class="card">Call of Duty: Battle Pass</div>
-                    </div>
-                    <h2 class="section-title">Последние пополнения</h2>
-                    <div class="grid">
-                        <div class="card">Mobile Legends: 500 Diamonds</div>
-                        <div class="card">PUBG: UC 600</div>
-                        <div class="card">Call of Duty: Weapon Skin</div>
-                    </div>
-                    <h2 class="section-title">Пополнение Mobile Legends</h2>
-                    <div class="card" onclick="renderGamePage('ml')">Mobile Legends</div>
-                    <h2 class="section-title">Другие игры</h2>
-                    <div class="secondary-icons">
-                        ${games
-                            .filter(game => game.id !== 'ml')
-                            .map(game => `<img src="https://via.placeholder.com/50?text=${game.name}" alt="${game.name}" onclick="renderGamePage('${game.id}')">`)
-                            .join('')}
-                    </div>
-                </div>
+<div class="container">
+    <div class="grid-columns">
+        <!-- Последние пополнения -->
+        <div>
+            <h2 class="section-title">Последние пополнения</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ник</th>
+                        <th>Игра</th>
+                        <th>Товар</th>
+                        <th>Время</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>***er123</td>
+                        <td>Mobile Legends</td>
+                        <td>100 Diamonds</td>
+                        <td>10:35</td>
+                    </tr>
+                    <tr>
+                        <td>***gun</td>
+                        <td>PUBG Mobile</td>
+                        <td>UC 300</td>
+                        <td>10:20</td>
+                    </tr>
+                    <tr>
+                        <td>***y14</td>
+                        <td>Call of Duty</td>
+                        <td>Weapon Skin</td>
+                        <td>10:10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Топ пополнений -->
+        <div>
+            <h2 class="section-title">Топ пополнений за всё время</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ник</th>
+                        <th>Игра</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TopGamer</td>
+                        <td>Mobile Legends</td>
+                        <td>$500</td>
+                    </tr>
+                    <tr>
+                        <td>GameLover</td>
+                        <td>PUBG Mobile</td>
+                        <td>$450</td>
+                    </tr>
+                    <tr>
+                        <td>PlayerX</td>
+                        <td>Call of Duty</td>
+                        <td>$300</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
             `;
         }
 
@@ -113,7 +191,7 @@
             `;
         }
 
-        
+
         renderHome();
     </script>
 </body>
