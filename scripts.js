@@ -1,25 +1,25 @@
-// Custom cursor logic
+// Логика кастомного курсора
 document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.getElementById('cursor');
 
-  // Update cursor position
+  // Обновление позиции курсора
   const updateCursorPosition = (x, y) => {
     cursor.style.left = `${x - 10}px`;
     cursor.style.top = `${y - 10}px`;
   };
 
-  // Mouse move event
+  // Событие движения мыши
   document.addEventListener('mousemove', (e) => {
     updateCursorPosition(e.clientX, e.clientY);
-    cursor.style.opacity = 1; // Ensure cursor is visible
+    cursor.style.opacity = 1; // Убедиться, что курсор видим
   });
 
-  // Hide cursor on mouse leave
+  // Скрыть курсор при уходе мыши
   document.addEventListener('mouseleave', () => {
     cursor.style.opacity = 0;
   });
 
-  // Show cursor on mouse enter
+  // Показать курсор при входе мыши
   document.addEventListener('mouseenter', () => {
     cursor.style.opacity = 1;
   });

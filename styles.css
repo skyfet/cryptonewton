@@ -1,4 +1,4 @@
-/* Disable text selection */
+/* Отключение выделения текста */
 * {
   user-select: none;
   -webkit-user-select: none;
@@ -10,16 +10,22 @@ a {
   text-decoration: none;
 }
 
-/* Body styles */
+/* Стили тела */
 body {
-  margin: 00px;
+  margin: 0;
   font-family: 'Orbitron', sans-serif;
   overflow-x: hidden;
   height: 100%;
-  cursor: none; /* Hide default cursor */
+  cursor: none; /* Скрыть стандартный курсор */
 }
 
-/* Custom cursor styles */
+.hidden {
+  display: none !important;
+}
+
+
+
+/* Стили кастомного курсора */
 .cursor {
   position: fixed;
   top: 0;
@@ -35,27 +41,27 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* Background animations */
+/* Анимации фона */
 body::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 42% 42%, rgba(0, 0, 0, 0.341), rgba(22, 22, 22, 1)),
-                radial-gradient(circle at 69% 69%, rgba(0, 255, 204, 0.66), transparent),
-                radial-gradient(circle at center, rgb(0, 0, 0), transparent);
-
-        z-index: -1;
-    animation: energy-flow 4s infinite alternate;
+  height: 100%;
+  background: radial-gradient(circle at 42% 42%, rgba(0, 0, 0, 0.341), rgba(22, 22, 22, 1)),
+              radial-gradient(circle at 69% 69%, rgba(0, 255, 204, 0.66), transparent),
+              radial-gradient(circle at center, rgb(0, 0, 0), transparent);
+  z-index: -1;
+  animation: energy-flow 4s infinite alternate;
 }
 
+/* Основной контейнер */
 main {
   margin: 8vh 8vw;
 }
 
-/* Header styles */
+/* Стили заголовка */
 header {
   text-align: center;
   margin: 50px 0;
@@ -68,7 +74,7 @@ header h1 {
   text-shadow: 0px 0 12px rgba(38, 181, 186, 0.267);
 }
 
-/* Top-up button styles */
+/* Стили кнопки пополнения */
 .top-up-btn {
   margin: -10px 10px;
   display: inline-block;
@@ -78,46 +84,51 @@ header h1 {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  opacity: .8;
-  cursor: none; /* Use custom cursor */
+  opacity: 0.8;
+  cursor: none; /* Использовать кастомный курсор */
 }
 
 .top-up-btn:hover {
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.475);
 }
 
-/* Cards container using Grid */
+/* Контейнер карточек с использованием Grid */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr)); /* Flexible grid layout */
-  gap: 42px; /* Spacing between cards */
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr)); /* Гибкая сетка */
+  gap: 42px; /* Отступ между карточками */
   padding: 20px;
 }
 
-/* Card styles */
+
+/* Стили карточки */
 .card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: rgba(22, 8, 22, 0.9);
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 0 12px  rgba(22, 22, 22, 0.01);
-  transition:  background .4s, transform 0.4s, box-shadow 0.4s;
+  background: rgba(22, 8, 22, 0.9);
+  box-shadow: 0 0 12px rgba(22, 22, 22, 0.01);
+  transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
   opacity: 1;
+  mix-blend-mode: normal;
+
+}
+.card:not(.touchable) {
+  background: none;
 }
 
-.touchable:hover {
+.touchable.card:hover {
   background-image: none;
   transform: translateY(-10px) rotateX(5deg);
   box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
-
   animation: little-ripple 4s linear infinite;
 }
 
-/* Card background animations */
+/* Анимации фона карточки */
 .card::before {
   content: '';
   padding: 12px;
@@ -130,22 +141,29 @@ header h1 {
   animation: ripple 8s linear infinite;
   background: radial-gradient(circle, rgba(0, 0, 0, 0.242), rgb(0, 255, 222));
 }
+
 .hoverme {
-  opacity: 0; /* Initially hidden */  
+  opacity: 0; /* Изначально скрыто */
   transform: translateY(10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Card title */
+/* Заголовок карточки */
 .card h2 {
-  margin-top: 20px;
+  margin: 10px;
   font-size: 1.8rem;
   text-align: center;
   color: #53defa;
-  
+}
+.card h3 {
+  margin: 8px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #53defa;
+  text-shadow: 0 0 10px #53defabb;
 }
 
-/* Card description */
+/* Описание карточки */
 .card p {
   font-size: 12px;
   color: #eeee;
@@ -153,15 +171,13 @@ header h1 {
   margin: 10px 20px;
 }
 
-/* Show description on hover */
+/* Показ описания при наведении */
 .card:hover .hoverme {
   opacity: 1;
   transform: translateY(0);
 }
 
-
-
-/* Card list items */
+/* Список элементов карточки */
 .card ul {
   list-style: none;
   padding: 8px;
@@ -170,25 +186,24 @@ header h1 {
   color: #eeee;
   font-weight: 400;
   text-shadow: 0 0 12px 2px #321;
-  opacity: 0; /* Initially hidden */
+  opacity: 0; /* Изначально скрыто */
   transform: translateY(10px);
   transition: opacity 0.69s ease, transform 0.69s ease;
 }
 
-/* Show list items on hover */
+/* Показ списка при наведении */
 .card:hover ul {
   opacity: 1;
   transform: translateY(0);
-  animation: float 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite; /* Floating animation */
+  animation: float 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite; /* Плавающая анимация */
 }
 
-/* Individual list item */
+/* Индивидуальный элемент списка */
 .card li {
   margin: 10px 0;
-  /* background: #eeee; */
 }
 
-/* Card link/button */
+/* Ссылка/кнопка карточки */
 .card a {
   display: block;
   text-align: center;
@@ -207,7 +222,7 @@ header h1 {
   transform: scale(1.1);
 }
 
-/* Background images for cards */
+/* Фоновые изображения для карточек */
 .bgim {
   background-size: 100% auto;
   background-position: 50%;
@@ -221,27 +236,36 @@ header h1 {
 .genshin {
   background-image: url("images/genshin.webp");
 }
+
 .pubg {
   background-image: url("images/pubg.png");
 }
+
 .freefire {
   background-image: url("images/freefire.png");
 }
+
 .cod {
   background-image: url("images/cod.png");
 }
+
 .fortnite {
   background-image: url("images/fortnite.png");
 }
+
 .roblox {
   background-image: url("images/roblox.png");
 }
 
-/* Footer styles */
+/* Стили подвала */
 footer {
   margin-top: auto;
   text-align: center;
   padding: 20px;
-  color: #222;
+  color: #eeee;
   font-size: 0.9rem;
+}
+
+.lighten {
+  background-color: #555a;
 }
