@@ -8,8 +8,6 @@
 body {
     margin: 0;
     font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(120deg, #002B5B, #000000);
-    color: white;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
@@ -42,11 +40,11 @@ body {
     left: 0;
     width: 100vw;
     height: 100%;
-    background: radial-gradient(circle at 42% 42%, rgba(0, 0, 0, 0.341), transparent),
+    background: radial-gradient(circle at 42% 42%, rgba(0, 0, 0, 0.341), rgba(22, 22, 22, 1)),
                 radial-gradient(circle at 69% 69%, rgba(0, 255, 204, 0.66), transparent),
                 radial-gradient(circle at center, rgb(0, 0, 0), transparent);
     z-index: -1;
-    animation: energy-flow 4s infinite alternate;
+    animation: energy-flow 8s infinite alternate;
   }
 
   header {
