@@ -1,126 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payterminal</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayTerminal - Dynamic Energy Fusion</title>
+  <link rel="stylesheet" href="animations.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="header">Payterminal</div>
-    <div id="app">
-        <!-- Контент загружается динамически -->
+  <header>
+    <h1>pay[terminal]</h1> <a href="#" class="top-up-btn">Connect Telegram</a>
+  </header>
+  <div class="cards-container">
+    <div class="card ml bgim">
+      <h2>Mobile Legends</h2>
+      <p>Epic battles await. Gear up and win!</p>
+      <!-- <ul>
+        <li>💎 Diamonds: 10-500</li>
+        <li>⚔️ Skins: Epic, Limited</li>
+        <li>🎮 Battle Pass</li>
+      </ul> -->
     </div>
-
-    <script>
-        const app = document.getElementById('app');
-
-        const games = [
-            { id: 'ml', name: 'Mobile Legends', products: ['100 Diamonds', '200 Diamonds', '500 Diamonds', 'Сезонный пропуск'] },
-            { id: 'cod', name: 'Call of Duty', products: ['Battle Pass', 'Weapon Skin'] },
-            { id: 'pubg', name: 'PUBG Mobile', products: ['UC 100', 'UC 300', 'UC 600'] }
-        ];
-
-        function renderHome() {
-            app.innerHTML = `
-                <div class="container">
-                    <div class="container">
-    <div class="grid-columns">
-        <!-- Последние пополнения -->
-        <div>
-            <h2 class="section-title">Последние пополнения</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ник</th>
-                        <th>Игра</th>
-                        <th>Товар</th>
-                        <th>Время</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>***er123</td>
-                        <td>Mobile Legends</td>
-                        <td>100 Diamonds</td>
-                        <td>10:35</td>
-                    </tr>
-                    <tr>
-                        <td>***gun</td>
-                        <td>PUBG Mobile</td>
-                        <td>UC 300</td>
-                        <td>10:20</td>
-                    </tr>
-                    <tr>
-                        <td>***y14</td>
-                        <td>Call of Duty</td>
-                        <td>Weapon Skin</td>
-                        <td>10:10</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Топ пополнений -->
-        <div>
-            <h2 class="section-title">Топ пополнений за всё время</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ник</th>
-                        <th>Игра</th>
-                        <th>Сумма</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>TopGamer</td>
-                        <td>Mobile Legends</td>
-                        <td>$500</td>
-                    </tr>
-                    <tr>
-                        <td>GameLover</td>
-                        <td>PUBG Mobile</td>
-                        <td>$450</td>
-                    </tr>
-                    <tr>
-                        <td>PlayerX</td>
-                        <td>Call of Duty</td>
-                        <td>$300</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="card genshin bgim">
+      <h2>Genshin Impact</h2>
+      <p>Embark on an open-world journey.</p>
+      <ul>
+        <li>✨ Primogems: 60-6480</li>
+        <li>💠 Crystals</li>
+        <li>🎭 Character Packs</li>
+      </ul>
     </div>
-</div>
-                    <h2 class="section-title">Пополнение Mobile Legends</h2>
-                    <div class="card" onclick="renderGamePage('ml')">Mobile Legends</div>
-                    <h2 class="section-title">Другие игры</h2>
-                    <div class="secondary-icons">
-                        ${games
-                            .filter(game => game.id !== 'ml')
-                            .map(game => `<img src="https://via.placeholder.com/50?text=${game.name}" alt="${game.name}" onclick="renderGamePage('${game.id}')">`)
-                            .join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderGamePage(gameId) {
-            const game = games.find(g => g.id === gameId);
-            app.innerHTML = `
-                <div class="container">
-                    <h2 class="section-title">${game.name}</h2>
-                    <div class="grid">
-                        ${game.products.map(product => `<div class="card">${product}</div>`).join('')}
-                    </div>
-                    <button onclick="renderHome()">Назад</button>
-                </div>
-            `;
-        }
-
-
-        renderHome();
-    </script>
+  </div>
+  <footer>
+    © 2024 PayTerminal. Experience the dynamic fusion of reality and digital energy.
+  </footer>
+  <div class="cursor" id="cursor"></div>
+  <script src="scripts.js"></script>
 </body>
 </html>

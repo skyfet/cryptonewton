@@ -1,0 +1,53 @@
+/* animations.css */
+
+/* Energy Flow Background */
+@keyframes energy-flow {
+    0% {
+      transform: scale(1) translate(0, 0);
+    }
+    100% {
+      transform: scale(1.5) translate(10px, 10px);
+    }
+  }
+  
+  /* Button Glow */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(255, 75, 31, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(31, 221, 255, 0.8);
+    }
+  }
+  
+  /* Card Ripple Effect */
+  @keyframes ripple {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes bg-move {
+    0% {
+      background-position: 0 0;
+      transform: rotate(0deg);
+    }
+    50% {
+      background-position: -24.21609px -2.42px;
+      transform: rotate(6.28deg);
+
+    }
+    100% {
+        background-position: -48.43218px -4.84px;
+        transform: rotate(62.8deg);
+
+    }
+  }
