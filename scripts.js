@@ -1,28 +1,26 @@
-const cursor = document.getElementById("cursor");
+// Custom cursor logic
+document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.getElementById('cursor');
 
-// Функция для обновления позиции курсора
-function updateCursorPosition(x, y) {
-  cursor.style.left = x + "px";
-  cursor.style.top = y + "px";
-}
+  // Update cursor position
+  const updateCursorPosition = (x, y) => {
+    cursor.style.left = `${x - 10}px`;
+    cursor.style.top = `${y - 10}px`;
+  };
 
-// Событие для мыши
-document.addEventListener("mousemove", (e) => {
-  updateCursorPosition(e.clientX, e.clientY);
-});
+  // Mouse move event
+  document.addEventListener('mousemove', (e) => {
+    updateCursorPosition(e.clientX, e.clientY);
+    cursor.style.opacity = 1; // Ensure cursor is visible
+  });
 
-// Событие для касания на мобильных устройствах
-document.addEventListener("touchmove", (e) => {
-  const touch = e.touches[0];
-  updateCursorPosition(touch.clientX, touch.clientY);
-});
+  // Hide cursor on mouse leave
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = 0;
+  });
 
-// Скрытие курсора при выходе мыши
-document.addEventListener("mouseleave", () => {
-  cursor.style.opacity = 0; // Скрыть курсор
-});
-
-// Показ курсора при возврате мыши
-document.addEventListener("mouseenter", () => {
-  cursor.style.opacity = 1; // Показать курсор
+  // Show cursor on mouse enter
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = 1;
+  });
 });

@@ -1,172 +1,247 @@
-/* Отключение выделения текста */
+/* Disable text selection */
 * {
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
 
-body {
-    margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    cursor: none;
-  }
+a {
+  cursor: none;
+  text-decoration: none;
+}
 
-/* Анимация курсора */
+/* Body styles */
+body {
+  margin: 00px;
+  font-family: 'Orbitron', sans-serif;
+  overflow-x: hidden;
+  height: 100%;
+  cursor: none; /* Hide default cursor */
+}
+
+/* Custom cursor styles */
 .cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 15px;
-  height: 15px;
-  background: radial-gradient(circle, rgba(0, 255, 255, 1), rgb(105, 105, 254));
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, rgba(91, 171, 241, 0.888), rgba(95, 235, 167, 0.999));
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.5);
-  animation: pulse 8s infinite, bg-move 8s infinite alternate;
+  box-shadow: 0 0 32px rgba(77, 202, 255, 0.8), 0 0 16px 2px rgba(149, 149, 149, 0.69);
+  animation: pulse 8s infinite, round 4s infinite alternate;
   transform: translate(-50%, -50%);
 }
-  
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
+/* Background animations */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
     height: 100%;
     background: radial-gradient(circle at 42% 42%, rgba(0, 0, 0, 0.341), rgba(22, 22, 22, 1)),
                 radial-gradient(circle at 69% 69%, rgba(0, 255, 204, 0.66), transparent),
                 radial-gradient(circle at center, rgb(0, 0, 0), transparent);
-    z-index: -1;
-    animation: energy-flow 8s infinite alternate;
-  }
 
-  header {
-    text-align: center;
-    margin: 50px 0;
-  }
+        z-index: -1;
+    animation: energy-flow 4s infinite alternate;
+}
 
-  header h1 {
-    font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-size: 42px;
-    color: #ffffff;
-    text-shadow: 0px 0 24px rgba(255, 255, 255, 0.336);
-  }
+main {
+  margin: 8vh 8vw;
+}
 
-  .top-up-btn {
-    padding: 8px 24px;
-    background: linear-gradient(90deg, #0062ff, #39caad);
-    color: white;
-    font-size: 1.2rem;
-    border-radius: 30px;
-    text-transform: uppercase;
-    text-decoration: none;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.211);
-  }
+/* Header styles */
+header {
+  text-align: center;
+  margin: 50px 0;
+}
 
-  .cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
-    flex-direction: column;
-  }
+header h1 {
+  display: inline-block;
+  font-size: 42px;
+  color: rgba(255, 255, 255, 0.915);
+  text-shadow: 0px 0 12px rgba(38, 181, 186, 0.267);
+}
 
-  .card {
-    position: relative;
-    max-width: 50vh;
-    max-height: 50vh;
-    width: 80vw;
-    height: 80vw;
-    background: rgba(0, 0, 20, 0.9);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.1s, box-shadow 0.1s;
-  }
+/* Top-up button styles */
+.top-up-btn {
+  margin: -10px 10px;
+  display: inline-block;
+  background: url(telegram.png) no-repeat center;
+  background-size: 120%;
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  opacity: .8;
+  cursor: none; /* Use custom cursor */
+}
 
-  .card:hover {
-    transform: translateY(-10px) rotateX(5deg);
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
-  }
+.top-up-btn:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.475);
+}
 
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.242), rgb(0, 255, 229));
-    z-index: -1;
-    animation: ripple 8s linear infinite;
-  }
+/* Cards container using Grid */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr)); /* Flexible grid layout */
+  gap: 42px; /* Spacing between cards */
+  padding: 20px;
+}
 
-  .card h2 {
-    margin-top: 20px;
-    font-size: 1.8rem;
-    text-align: center;
-    color: #00d4ff;
-  }
+/* Card styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: rgba(22, 8, 22, 0.9);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 0 12px  rgba(22, 22, 22, 0.01);
+  transition:  background .4s, transform 0.4s, box-shadow 0.4s;
+  opacity: 1;
+}
 
-  .card p {
-    font-size: 1rem;
-    color: #d5d5d5;
-    text-align: center;
-    margin: 10px 20px;
-  }
+.touchable:hover {
+  background-image: none;
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
 
-  .card ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px;
-    font-size: 1rem;
-    color: #bbb;
-  }
+  animation: little-ripple 4s linear infinite;
+}
 
-  .card li {
-    margin: 5px 0;
-  }
+/* Card background animations */
+.card::before {
+  content: '';
+  padding: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: ripple 8s linear infinite;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.242), rgb(0, 255, 222));
+}
+.hoverme {
+  opacity: 0; /* Initially hidden */  
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
-  .card a {
-    display: block;
-    text-align: center;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background: linear-gradient(to right, #38ef7d, #11998e);
-    border-radius: 20px;
-    color: white;
-    text-decoration: none;
-    width: 60%;
-    font-size: 1.2rem;
-    transition: transform 0.2s;
-  }
+/* Card title */
+.card h2 {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #53defa;
+  
+}
+
+/* Card description */
+.card p {
+  font-size: 12px;
+  color: #eeee;
+  text-align: center;
+  margin: 10px 20px;
+}
+
+/* Show description on hover */
+.card:hover .hoverme {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+/* Card list items */
+.card ul {
+  list-style: none;
+  padding: 8px;
+  margin: 20px;
+  font-size: 1.5rem;
+  color: #eeee;
+  font-weight: 400;
+  text-shadow: 0 0 12px 2px #321;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(10px);
+  transition: opacity 0.69s ease, transform 0.69s ease;
+}
+
+/* Show list items on hover */
+.card:hover ul {
+  opacity: 1;
+  transform: translateY(0);
+  animation: float 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite; /* Floating animation */
+}
+
+/* Individual list item */
+.card li {
+  margin: 10px 0;
+  /* background: #eeee; */
+}
+
+/* Card link/button */
+.card a {
+  display: block;
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #38ef7d, #11998e);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  width: 60%;
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.card a:hover {
+  transform: scale(1.1);
+}
+
+/* Background images for cards */
 .bgim {
-  background-size: contain;
-  background-position: 42%;
+  background-size: 100% auto;
+  background-position: 50%;
   background-repeat: no-repeat;
 }
-.ml {
-  background-image: url("mobile-legends.png");
-}
-.genshin {
-  background-image: url("genshin.webp");
 
+.ml {
+  background-image: url("images/mobile-legends.png");
 }
-  .card a:hover {
-    transform: scale(1.1);
-  }
-  footer {
-    margin-top: auto;
-    text-align: center;
-    padding: 20px;
-    color: #222;
-    font-size: 0.9rem;
-  }
+
+.genshin {
+  background-image: url("images/genshin.webp");
+}
+.pubg {
+  background-image: url("images/pubg.png");
+}
+.freefire {
+  background-image: url("images/freefire.png");
+}
+.cod {
+  background-image: url("images/cod.png");
+}
+.fortnite {
+  background-image: url("images/fortnite.png");
+}
+.roblox {
+  background-image: url("images/roblox.png");
+}
+
+/* Footer styles */
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px;
+  color: #222;
+  font-size: 0.9rem;
+}
