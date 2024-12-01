@@ -27,6 +27,9 @@ function initApp() {
         console.error('Элементы .welcam или #username не найдены в DOM.');
       }
     } else {
+      const notAuthorizedBlock = document.querySelector('.not-authorized');
+
+      notAuthorizedBlock.classList.remove('hidden');
       console.warn('Данные пользователя недоступны.');
     }
 
@@ -150,6 +153,8 @@ function initCursor() {
     }
   }
 }
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   initCursor();

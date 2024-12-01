@@ -37,6 +37,10 @@ body {
   background-color: #2345;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Скрытый класс */
 .hidden {
   display: none !important;
@@ -78,7 +82,7 @@ body::before {
 
 /* 5. Основной контейнер */
 main {
-  margin: 4vh 4vw;
+  margin: 8vh 8vw;
 }
 
 .cards-container header  {
@@ -101,9 +105,9 @@ header h1 {
 
 /* 7. Кнопка пополнения */
 .top-up-btn {
-  margin: -10px 10px;
+  margin: -16px 0;
   display: inline-block;
-  background: url(telegram.png) no-repeat center;
+  background: url(images/telegram.png) no-repeat center;
   background-size: 120%;
   border: none;
   width: 48px;
@@ -151,6 +155,7 @@ header h1 {
   transform: translateY(-10px) rotateX(5deg);
   box-shadow: 0 0 40px var(--card-hover-bg);
   animation: little-ripple 4s linear infinite;
+
 }
 
 /* Анимации фона карточки */
@@ -295,89 +300,47 @@ footer {
   background-color: rgba(85, 90, 0, 0.333); /* Объединение смежных цветов */
 }
 
-/* 13. Анимации */
-@keyframes energy-flow {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  100% {
-    transform: scale(1.5) translate(10px, 10px);
-  }
+
+/* Добавьте эти стили в styles.css */
+
+/* Контейнер для частиц */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-@keyframes round {
-  0% {
-    background-position: 0 0;
-    transform: rotate(0deg);
-  }
-  50% {
-    background-position: -242.1609px -24.2px;
-    transform: rotate(62.8deg);
-  }
-  100% {
-    background-position: -484.3218px -36.3px;
-    transform: rotate(124deg);
-  }
+/* Стиль для каждой частицы */
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #000000;
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleSuck 1s forwards;
 }
 
-@keyframes ripple {
-  0% {
-    transform: scale(1);
-    opacity: 1;
+@keyframes particleSuck {
+  from {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
   }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.3;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+  to {
+      opacity: 0;
+      transform: translate(100px, -100px) scale(0);
   }
 }
-
-@keyframes little-ripple {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.88;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+.card.sucking {
+  -webkit-animation: suck 1s forwards;
+  animation: suck 1s forwards;
 }
 
-@keyframes pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.3);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* 14. Медиа-запросы для адаптивности */
+/* 13. Медиа-запросы для адаптивности */
 
 /* Большие экраны (от 1201px и выше) */
 /* Здесь можно добавить специфические стили, если необходимо */
