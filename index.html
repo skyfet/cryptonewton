@@ -167,23 +167,11 @@
   <!-- Кастомный курсор -->
   <div class="cursor" id="cursor"></div>
 
-  <!-- JavaScript -->
-  <script src="scripts.js" defer></script>
-
+  
   <!-- Инициализация Telegram Web App -->
   <script async src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    Telegram.WebApp.ready();
 
-    // Пример доступа к данным пользователя
-    const user = Telegram.WebApp.initDataUnsafe.user;
-    if (user) {
-      console.log(`Hello, ${user.first_name}!`);
-      // Можно настроить интерфейс на основе данных пользователя
-      // Например, изменить заголовок:
-      document.querySelector('.welcam').classList.remove('hidden');
-      document.querySelector('#username').innerHTML = user.first_name;
-    }
-  </script>
+  <!-- JavaScript -->
+  <script src="scripts.js" defer></script>
 </body>
 </html>
