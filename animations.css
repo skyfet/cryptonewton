@@ -83,3 +83,26 @@
     transform: translateY(0);
   }
 }
+
+@keyframes wave {
+  0% {
+    d: path("M120 150 Q200 80, 380 150 T580 150");
+  }
+  50% {
+    d: path("M120 140 Q200 100, 380 140 T580 140");
+  }
+  100% {
+    d: path("M120 150 Q200 80, 380 150 T580 150");
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

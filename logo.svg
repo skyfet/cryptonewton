@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="200" viewBox="0 0 500 200">
+  <defs>
+    <!-- Стилизация -->
+    <style>
+          .energy-circle {
+            fill: url(#radialGradient);
+          }
+          .energy-wave {
+            fill: none;
+            stroke: url(#linearGradientWeak);
+            stroke-width: 3;
+            stroke-linecap: round;
+            opacity: 0.5;
+          }
+          .spark {
+            fill: url(#linearGradient);
+          }
+          .brand-text {
+            fill: url(#linearGradient);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+          }
+    </style>
+
+    <!-- Градиенты -->
+    <radialGradient id="radialGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="12%" stop-color="#38ef7d" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#11998e" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="linearGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38ef7d" />
+      <stop offset="100%" stop-color="#11998e" />
+    </linearGradient>
+
+    <linearGradient id="linearGradientWeak" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#11998e" stop-opacity="0" />
+      <stop offset="50%" stop-color="#38ef7d" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#11998e" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Группировка элементов энергии -->
+  <g class="energy">
+    <!-- Фоновый круг энергии -->
+    <circle class="energy-circle" cx="60" cy="100" r="50">
+      <animate attributeName="r" values="50;55;50" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite" keySplines="0.42,0,0.58,1;0.42,0,0.58,1" calcMode="spline" />
+      <animate attributeName="opacity" values="0.7;1;0.7" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite" keySplines="0.42,0,0.58,1;0.42,0,0.58,1" calcMode="spline" />
+    </circle>
+
+    <!-- Волна энергии -->
+    <path class="energy-wave" d="M50 100 Q100 50, 150 100 T350 100">
+      <animateTransform attributeName="transform" type="translate" values="0,0;10,0;0,0" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite" keySplines="0.42,0,0.58,1;0.42,0,0.58,1" calcMode="spline" />
+      <animate attributeName="stroke-opacity" values="1;0.7;1" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite" keySplines="0.42,0,0.58,1;0.42,0,0.58,1" calcMode="spline" />
+    </path>
+  </g>
+
+  <!-- Текст бренда -->
+  <text class="brand-text" x="130" y="115">
+        pay[terminal]
+  </text>
+</svg>

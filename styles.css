@@ -39,7 +39,37 @@ body {
 
 a {
   text-decoration: none;
+  cursor: none;
 }
+
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.logo-container svg {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+.logo-container svg:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+@keyframes waveFlow {
+  0% { d: path("M50,100 C70,50 130,150 150,100"); }
+  50% { d: path("M50,100 C70,150 130,50 150,100"); }
+  100% { d: path("M50,100 C70,50 130,150 150,100"); }
+}
+
+.logo-container path {
+  animation: waveFlow 4s infinite;
+}
+
 
 /* Скрытый класс */
 .hidden {
@@ -92,7 +122,7 @@ main {
 /* 6. Заголовок */
 header {
   text-align: center;
-  margin: 50px 0;
+  margin: 8px;
 }
 
 header h1 {
@@ -125,7 +155,7 @@ header h1 {
 /* 8. Контейнер карточек */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Гибкая сетка */
+  grid-template-columns: repeat(auto-fit, minmax(350px, auto)); /* Гибкая сетка */
   gap: 2.42vw; /* Отступ между карточками */
   padding: 12px 24px;
 }
@@ -144,6 +174,7 @@ header h1 {
   transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
   opacity: 1;
   mix-blend-mode: normal;
+  padding: 8px;
 }
 
 .card:not(.touchable) {
@@ -380,7 +411,7 @@ footer {
 /* Маленькие экраны (до 768px) */
 @media (max-width: 768px) {
   main {
-    margin: 4vh 4vw;
+    margin: 2vh 2vw;
   }
 
   header h1 {
@@ -390,11 +421,11 @@ footer {
   .cards-container {
     grid-template-columns: 1fr; /* Один столбец на мобильных устройствах */
     gap: 2vw;
-    padding: 16px 12px;
+    padding: 12px;
   }
 
   .card {
-    padding: 15px;
+    padding: 20px;
   }
 
   .card h2 {
@@ -436,7 +467,7 @@ footer {
 
   .cards-container {
     gap: 3vw;
-    padding: 12px 8px;
+    padding: 8px;
   }
 
   .card h2 {
