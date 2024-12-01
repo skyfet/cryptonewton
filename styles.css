@@ -6,7 +6,7 @@
   --header-shadow: rgba(38, 181, 186, 0.267);
   --card-bg: rgba(22, 8, 22, 0.9);
   --card-hover-bg: rgba(0, 212, 255, 0.6);
-  --cursor-bg: radial-gradient(circle, rgba(91, 171, 241, 0.888), rgba(95, 235, 167, 0.999));
+  --cursor-bg: radial-gradient(circle, rgb(94, 180, 255), rgba(102, 253, 180, 1));
   --shadow-primary: rgba(77, 202, 255, 0.8);
   --shadow-secondary: rgba(149, 149, 149, 0.69);
   --button-gradient: linear-gradient(to right, #38ef7d, #11998e);
@@ -81,6 +81,10 @@ main {
   margin: 4vh 4vw;
 }
 
+.cards-container header  {
+  text-align: right;
+}
+
 /* 6. Заголовок */
 header {
   text-align: center;
@@ -93,6 +97,7 @@ header h1 {
   color: var(--header-color);
   text-shadow: 0px 0 12px var(--header-shadow);
 }
+
 
 /* 7. Кнопка пополнения */
 .top-up-btn {
@@ -116,7 +121,7 @@ header h1 {
 /* 8. Контейнер карточек */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Гибкая сетка */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Гибкая сетка */
   gap: 2.42vw; /* Отступ между карточками */
   padding: 12px 24px;
 }
@@ -142,7 +147,7 @@ header h1 {
 }
 
 .touchable.card:hover {
-  background-image: none;
+  /* background-image: none; */
   transform: translateY(-10px) rotateX(5deg);
   box-shadow: 0 0 40px var(--card-hover-bg);
   animation: little-ripple 4s linear infinite;
@@ -158,8 +163,9 @@ header h1 {
   height: 100%;
   padding: 12px;
   z-index: -1;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.242), rgb(0, 255, 222));
+  background: radial-gradient(circle, rgba(0, 0, 0, 1), rgb(69, 255, 222));
   animation: ripple 8s linear infinite;
+  /* mix-blend-mode: exclusion; */
 }
 
 /* 10. Скрытые элементы карточки */
@@ -203,10 +209,11 @@ header h1 {
   font-size: 1.5rem;
   color: var(--text-color);
   font-weight: 400;
-  text-shadow: 0 0 12px 2px #321;
+  text-shadow: 0 0 12px 2px #000;
   opacity: 0; /* Изначально скрыто */
   transform: translateY(10px);
   transition: opacity 0.69s ease, transform 0.69s ease;
+  mix-blend-mode: darken;
 }
 
 .card:hover ul {
@@ -240,37 +247,39 @@ header h1 {
 
 /* 11. Фоновые изображения для карточек */
 .bgim {
-  background-size: 100% auto;
+  background-size: cover;
   background-position: 50%;
   background-repeat: no-repeat;
 }
 
-.bgim.ml {
-  background-image: url("images/mobile-legends.png");
+.bgim.genshin {
+  background-image: url("images/genshin.jpg");
+  background-color: #eeee;
 }
 
-.bgim.genshin {
-  background-image: url("images/genshin.webp");
+.bgim.ml {
+  background-image: url("images/me.jpg");
 }
+
 
 .bgim.pubg {
-  background-image: url("images/pubg.png");
+  background-image: url("images/pubg.jpg");
 }
 
 .bgim.freefire {
-  background-image: url("images/freefire.png");
+  background-image: url("images/freefire.webp");
 }
 
 .bgim.cod {
-  background-image: url("images/cod.png");
+  background-image: url("images/cod.jpeg");
 }
 
 .bgim.fortnite {
-  background-image: url("images/fortnite.png");
+  background-image: url("images/fortnite.webp");
 }
 
 .bgim.roblox {
-  background-image: url("images/roblox.png");
+  background-image: url("images/roblox.jpg");
 }
 
 /* 12. Подвал */
