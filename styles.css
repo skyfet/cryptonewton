@@ -95,6 +95,10 @@ a {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+.logo {
+  max-height: 120px;
+}
+
 /* 4. Фоновые анимации */
 body::before {
   content: '';
