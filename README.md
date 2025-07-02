@@ -1,0 +1,100 @@
+# Star Pay Terminal
+
+This repository contains a simple proof-of-concept for a Telegram WebApp and backend server.
+
+## Project structure
+
+```
+star-pay-terminal/
+├── frontend/ (Telegram WebApp)
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── AmountPicker.jsx
+│   │   │   └── UsernameDisplay.jsx
+│   │   ├── pages/
+│   │   │   ├── Welcome.jsx
+│   │   │   ├── Buy.jsx
+│   │   │   ├── Gift.jsx
+│   │   │   └── Success.jsx
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   ├── tg.js
+│   │   └── api.js
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/
+│   ├── controllers/
+│   │   ├── transactions.js
+│   │   └── inline.js
+│   ├── middleware/
+│   │   └── verifyTelegram.js
+│   ├── routes/
+│   │   ├── transactions.js
+│   │   └── inline.js
+│   ├── utils/
+│   │   └── telegramAPI.js
+│   ├── index.js
+│   └── package.json
+│
+├── database/
+│   └── schema.sql (optional)
+│
+└── bot/
+    ├── handlers/
+    │   ├── inlineQueryHandler.js
+    │   └── menuHandler.js
+    └── bot.js
+```
+
+## Backend API
+
+- `POST /purchase` — buy stars for the current user.
+- `POST /gift` — gift stars to another user.
+
+All requests must be validated using Telegram HMAC and user information fetched from the Telegram API. Amounts must be between `1` and `250000`.
+
+## Inline queries
+
+The bot can respond to inline queries with a WebApp URL so users can quickly send gifts. Example response:
+
+```json
+[
+  {
+    "type": "article",
+    "id": "gift_123456789",
+    "title": "\u041f\u043e\u0434\u0430\u0440\u0438\u0442\u044c \u0437\u0432\u0451\u0437\u0434\u044b \u0410\u0440\u0442\u0451\u043c\u0443",
+    "input_message_content": {
+      "message_text": "\uD83C\uDF81 \u042f \u0441\u043E\u0431\u0438\u0440\u0430\u044E\u0441\u044C \u043F\u043E\u0434\u0430\u0440\u0438\u0442\u044C \u0437\u0432\u0451\u0437\u0434\u044B \u0410\u0440\u0442\u0451\u043C\u0443!"
+    },
+    "reply_markup": {
+      "inline_keyboard": [
+        [
+          {
+            "text": "\uD83C\uDF89 \u041E\u0442\u043A\u0440\u044B\u0442\u044C WebApp",
+            "web_app": {
+              "url": "https://yourwebapp.com?mode=gift&user_id=123456789"
+            }
+          }
+        ]
+      ]
+    }
+  }
+]
+```
+
+## Security
+
+- HMAC validation of all WebApp requests
+- User verification through Telegram API
+- Limits on transaction amounts
+
+## Success criteria
+
+- Purchasing stars for yourself
+- Gifting stars to another user via inline interface
+- Data validation and error handling
+- URL parameters `mode` and `user_id` control WebApp behaviour
+
