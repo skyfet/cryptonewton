@@ -11,15 +11,15 @@ star-pay-terminal/
 │   │   └── index.html
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── AmountPicker.jsx
-│   │   │   └── UsernameDisplay.jsx
+│   │   │   ├── AmountPicker.svelte
+│   │   │   └── UsernameDisplay.svelte
 │   │   ├── pages/
-│   │   │   ├── Welcome.jsx
-│   │   │   ├── Buy.jsx
-│   │   │   ├── Gift.jsx
-│   │   │   └── Success.jsx
-│   │   ├── App.jsx
-│   │   ├── main.jsx
+│   │   │   ├── Welcome.svelte
+│   │   │   ├── Buy.svelte
+│   │   │   ├── Gift.svelte
+│   │   │   └── Success.svelte
+│   │   ├── App.svelte
+│   │   ├── main.js 
 │   │   ├── tg.js
 │   │   └── api.js
 │   ├── package.json
