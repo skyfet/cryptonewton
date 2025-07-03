@@ -1,15 +1,10 @@
 <script>
   import { onMount } from 'svelte'
-  import { getHistory } from '../api.js'
-  import { tg } from '../tg.js'
 
   let records = []
 
-  onMount(async () => {
-    const userId = tg.initDataUnsafe?.user?.id
-    if (userId) {
-      records = await getHistory(userId)
-    }
+  onMount(() => {
+    records = JSON.parse(localStorage.getItem('history') || '[]')
   })
 </script>
 
