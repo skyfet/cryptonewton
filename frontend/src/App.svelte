@@ -6,6 +6,7 @@
   import Buy from './pages/Buy.svelte';
   import Gift from './pages/Gift.svelte';
   import Success from './pages/Success.svelte';
+  import History from './pages/History.svelte';
 
   let current = window.location.hash.slice(1) || '/';
 
@@ -13,7 +14,8 @@
     '/': Welcome,
     '/buy': Buy,
     '/gift': Gift,
-    '/success': Success
+    '/success': Success,
+    '/history': History
   };
 
   onMount(() => {

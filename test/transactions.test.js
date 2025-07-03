@@ -1,4 +1,4 @@
-const { purchase, gift, reset } = require("./mockBackend");
+const { purchase, gift, reset, history } = require("./mockBackend");
 
 beforeEach(() => {
   reset();
@@ -24,6 +24,29 @@ describe('Transaction logic', () => {
       const res = gift(1, 2, 5);
       expect(res.ok).toBe(true);
       expect(res.balance).toBe(15);
+    });
+  });
+
+  describe('history', () => {
+    it('records purchases with fiat value', () => {
+      purchase(1, 10);
+      const list = history(1);
+      expect(list.length).toBe(1);
+      expect(list[0].fiat).toBe(0.5);
+    });
+
+    it('returns empty array for new users', () => {
+      const list = history(99);
+      expect(list).toEqual([]);
+    });
+
+    it('accumulates multiple purchases', () => {
+      purchase(1, 5);
+      purchase(1, 15);
+      const list = history(1);
+      expect(list.length).toBe(2);
+      expect(list[0].amount).toBe(5);
+      expect(list[1].fiat).toBe(0.75);
     });
   });
 });

@@ -15,3 +15,8 @@ export async function gift(from_id, to_id, amount) {
   });
   return res.json();
 }
+
+export async function getHistory(user_id) {
+  const res = await fetch(`/history?user_id=${user_id}`);
+  return res.json();
+}
