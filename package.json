@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node backend/index.js",
     "bot": "node bot/bot.js",
-    "test": "jest"
+    "test": "jest",
+    "build": "npm --prefix frontend run build"
   },
   "keywords": [],
   "author": "",

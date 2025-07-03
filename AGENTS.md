@@ -9,4 +9,4 @@ These instructions apply to the entire repository.
 - Backend code should remain under `backend/` and use Express with CommonJS modules.
 - Ensure tests remain passing after your changes.
 
-- Document repository guidelines in AGENTS.md so future maintainers have clear instructions.
+- Document repository guidelines in AGENTS.md so future maintainers have clear instructions how to setup and recognize environment context.
