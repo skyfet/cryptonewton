@@ -1,14 +1,30 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  padding: 0;
   margin: 0;
-  background: var(--tg-bg-color, #f6f6f6);
-  color: var(--tg-text-color, #222);
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  color: var(--tg-text-color, #fff);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.7) 0 4px, transparent 2px),
+    radial-gradient(circle at 70% 35%, rgba(255,255,255,.6) 0 3px, transparent 3px),
+    radial-gradient(circle at 25% 65%, rgba(255,255,255,.5) 0 3px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.4) 0 2px, transparent 3px),
+    linear-gradient(to bottom,
+      #ffddb6aa 0%,
+      #ffc48faa 25%,
+      #ff9c66aa 45%,
+      #ffa0bcaa 60%,
+      #b9b4ffaa 75%,
+      #d0e0ffaa 100%
+    );
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
-.container { padding: 20px; }
+
+.container {
+  padding: 20px;
+}
+
 .btn {
-  /* display: block; */
-  /* width: 100%; */
   padding: 16px;
   font-size: 16px;
   cursor: pointer;
@@ -17,12 +33,20 @@ body {
   border: none;
   border-radius: 6px;
 }
-@media only screen and (max-width: 400px)  {
+
+@media only screen and (max-width: 400px) {
   .btn {
     font-size: 14px;
   }
 }
-.amounts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+.amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
 .amount {
   padding: 10px 15px;
   background: var(--tg-secondary-bg-color, #fff);
@@ -31,10 +55,12 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .amount.selected {
   background: var(--tg-button-color, #0077ff88);
   color: var(--tg-button-text-color, #fff);
 }
+
 input[type="number"] {
   padding: 10.5px;
   border: 1px solid var(--tg-hint-color, #ccc);
@@ -43,73 +69,47 @@ input[type="number"] {
   color: inherit;
   text-align: center;
   font-size: large;
-  -moz-appearance:textfield; /* Firefox */
+  -moz-appearance: textfield;
 }
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-
- button {
-        border: none;
-        padding: 0.5rem 2rem;
-        color: #fff;
-        font-size: 1.5rem;
-        border-radius: 1rem;
-        transition: all 250ms;
-        transform-origin: center;
-        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25),
-        inset 0px -2px 3px rgba(0, 0, 0, 0.25);
-    }
-    button:hover {
-        cursor: pointer;
-        transform: scale(0.975);
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-    }
-
-
-    body {
+  -webkit-appearance: none;
   margin: 0;
-  height: 100vh;
-  background: linear-gradient(to top,
-    #ffd194 0%,     /* мягкий тёплый оранжевый у горизонта */
-    #ffcc70 10%,    /* светло-оранжевый */
-    #b7eaff 30%,    /* нежный голубой */
-    #6b9acc 60%,    /* небесно-синий */
-    #2b3467 80%,    /* сумеречный синий */
-    #1a1e3b 100%    /* тёмно-синий с лёгким фиолетом */
-  );
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: white;
-  font-family: sans-serif;
-  position: relative;
 }
 
-body {
-		margin: 0;
-		min-height: 100vh;
+button {
+  border: none;
+  padding: 0.5rem 2rem;
+  color: #fff;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  transition: all 250ms;
+  transform-origin: center;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25), inset 0px -2px 3px rgba(0, 0, 0, 0.25);
+}
 
-		/* 1-й слой: россыпь мелких “звёзд”, созданных повторяющимися radial-градиентами  */
-		background-image:
-			radial-gradient(circle at 30% 20%, rgba(255,255,255,.7) 0 4px, transparent 2px), /* случайная звезда */
-			radial-gradient(circle at 70% 35%, rgba(255,255,255,.6) 0 3px, transparent 3px),
-			radial-gradient(circle at 25% 65%, rgba(255,255,255,.5) 0 3px, transparent 2px),
-			radial-gradient(circle at 80% 80%, rgba(255,255,255,.4) 0 2px, transparent 3px),
-			/* 2-й слой: сам закат */
-			linear-gradient(to bottom,
-				#ffddb6aa 0%,      /* почти белый персик – верх, ещё светло */
-				#ffc48faa 25%,     /* тёплый абрикос */
-				#ff9c66aa 45%,     /* оранжево-коралловая полоса солнца */
-				#ffa0bcaa 60%,     /* розово-лавандовый */
-				#b9b4ffaa 75%,     /* сиренево-голубой */
-				#d0e0ffaa 100%);   /* мягкий бледно-голубой горизонт */
-		
-		/* Повторяем слой “звёзд” по всей области */
-		background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto;
-		background-repeat: repeat;
+button:hover {
+  cursor: pointer;
+  transform: scale(0.975);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+}
 
-	}
+.star {
+  margin-left: 4px;
+}
+
+.sparkle {
+  animation: sparkle 1s infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(2);
+    transform: scale(1.2);
+  }
+}

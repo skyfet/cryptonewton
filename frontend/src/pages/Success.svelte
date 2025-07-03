@@ -9,7 +9,7 @@
 </script>
 
 <div class="container">
-  <div class="star">⭐</div>
+  <div class="star sparkle">⭐</div>
   {#if purchase}
     <p>Вы купили {purchase.amount} ⭐ за ${purchase.fiat.toFixed(2)}</p>
     <p class="time">{new Date(purchase.time).toLocaleString()}</p>

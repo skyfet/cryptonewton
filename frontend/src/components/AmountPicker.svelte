@@ -26,7 +26,10 @@
         class="amount {selected === a ? 'selected' : ''}"
         on:click={() => choose(a)}
       >
-        {a}  {selected != a ? '⭐' : '🌟'}
+        {a}
+        <span class="star {selected === a ? 'sparkle' : ''}">
+          {selected === a ? '🌟' : '⭐'}
+        </span>
       </div>
     {/each}
     {#if selected != "custom"}
@@ -46,8 +49,9 @@
         on:input={() => onSelect(parseInt(custom) || 0)}
         min="1"
         max="250000"
-      /> 
-      <span style="margin-left: -38px; margin-top: 8px;">⭐</span>
+      />
+      <span class="star {selected === 'custom' ? 'sparkle' : ''}"
+            style="margin-left: -38px; margin-top: 8px;">⭐</span>
     {/if}
   </div>
 </div>
