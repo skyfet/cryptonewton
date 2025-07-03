@@ -6,7 +6,7 @@ These instructions apply to the entire repository.
 - Keep commit messages brief and in the imperative mood.
 - When modifying any code, run `npm test --silent` before committing.
 - Place Svelte components under `frontend/src/components/` and pages under `frontend/src/pages/`.
-- Backend code should remain under `backend/` and use Express with CommonJS modules.
+- Backend code has been removed. Use the mock API under `test/mockBackend.js` for local testing.
 - Ensure tests remain passing after your changes.
 
 - Document repository guidelines in AGENTS.md so future maintainers have clear instructions how to setup and recognize environment context.

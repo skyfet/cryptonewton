@@ -1,6 +1,7 @@
 # Star Pay Terminal
 
-This repository contains a simple proof-of-concept for a Telegram WebApp and backend server.
+This repository contains a simple proof-of-concept for a Telegram WebApp.
+All transaction requests are handled by a mocked backend so the app works without a server.
 
 ## Project structure
 
@@ -25,20 +26,6 @@ star-pay-terminal/
   - package.json
   - vite.config.js
 
-- backend/
-  - controllers/
-    - transactions.js
-    - inline.js
-  - middleware/
-    - verifyTelegram.js
-  - routes/
-    - transactions.js
-    - inline.js
-  - utils/
-    - telegramAPI.js
-  - index.js
-  - package.json
-
 - database/
   - schema.sql (optional)
 
@@ -49,12 +36,10 @@ star-pay-terminal/
   - bot.js
 ```
 
-## Backend API
+## Mock API
 
-- `POST /purchase` - buy stars for the current user.
-- `POST /gift` - gift stars to another user.
-
-All requests must be validated using Telegram HMAC and user information fetched from the Telegram API. Amounts must be between `1` and `250000`.
+The original Express backend has been removed. Transactions are now simulated in-memory.
+`purchase(user_id, amount)` and `gift(from_id, to_id, amount)` return objects mimicking the old responses.
 
 ## Inline queries
 
