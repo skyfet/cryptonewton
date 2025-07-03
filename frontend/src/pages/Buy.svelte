@@ -1,8 +1,10 @@
 <script>
   import AmountPicker from "../components/AmountPicker.svelte";
+  import LoadingOverlay from "../components/LoadingOverlay.svelte";
   import { purchase } from "../api.js";
   import { navigate } from "../router.js";
   import { tg } from "../tg.js";
+  const PRICE_USD = 0.05;
   let amount = 0;
   let loading = false;
 
@@ -10,12 +12,18 @@
     const userId = tg.initDataUnsafe?.user?.id;
     if (!userId || amount < 1) return;
     loading = true;
-    await new Promise((r) => setTimeout(r, 5000));
-    // const res = await purchase(userId, amount);
+    await new Promise(r => setTimeout(r, 2000));
+    const tx = {
+      amount,
+      fiat: amount * PRICE_USD,
+      time: Date.now()
+    };
+    const history = JSON.parse(localStorage.getItem('history') || '[]');
+    history.push(tx);
+    localStorage.setItem('history', JSON.stringify(history));
+    localStorage.setItem('lastPurchase', JSON.stringify(tx));
     loading = false;
-    // if (res.ok)
-    navigate("/success");
-    // else alert(res.error);
+    navigate('/success');
   }
 </script>
 
@@ -27,40 +35,5 @@
 </div>
 
 {#if loading}
-  <div class="overlay">
-    <div class="spinner"></div>
-    <p>Загрузка...</p>
-  </div>
+  <LoadingOverlay />
 {/if}
-
-<style>
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--tg-bg-color, rgba(255, 255, 255, 0.9));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--tg-hint-color, #ccc);
-    border-top-color: var(--tg-button-color, #0077ff);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 10px;
-  }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
