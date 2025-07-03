@@ -8,3 +8,4 @@ These instructions apply to the entire repository.
 - Place Svelte components under `frontend/src/components/` and pages under `frontend/src/pages/`.
 - Backend code should remain under `backend/` and use Express with CommonJS modules.
 - Ensure tests remain passing after your changes.
+- Save understandable instructions for future agents in this AGENTS.md format.
