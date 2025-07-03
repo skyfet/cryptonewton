@@ -26,7 +26,7 @@
         class="amount {selected === a ? 'selected' : ''}"
         on:click={() => choose(a)}
       >
-        {a} ⭐
+        {a}  {selected != a ? '⭐' : '🌟'}
       </div>
     {/each}
     {#if selected != "custom"}

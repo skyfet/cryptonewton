@@ -20,7 +20,7 @@
 </script>
 
 <div class="container">
-  <h1>Сколько желаете?</h1>
+  <h1><button class="btn" on:click={() => navigate("/")}>🢀</button> Сколько желаете?</h1>
   <AmountPicker onSelect={(val) => (amount = val)} />
   <button class="btn" on:click={confirm} disabled={loading}>Купить</button>
 </div>

@@ -7,13 +7,13 @@ body {
 }
 .container { padding: 20px; }
 .btn {
-  display: block;
-  width: 100%;
+  /* display: block; */
+  /* width: 100%; */
   padding: 12px;
   margin: 10px 0;
   font-size: 16px;
   cursor: pointer;
-  background: var(--tg-button-color, #0077ff);
+  background: var(--tg-button-color, #0077ff88);
   color: var(--tg-button-text-color, #fff);
   border: none;
   border-radius: 6px;
@@ -27,7 +27,7 @@ body {
   cursor: pointer;
 }
 .amount.selected {
-  background: var(--tg-button-color, #0077ff);
+  background: var(--tg-button-color, #0077ff88);
   color: var(--tg-button-text-color, #fff);
 }
 input[type="number"] {
@@ -46,4 +46,54 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+ button {
+        border: none;
+        padding: 0.5rem 2rem;
+        color: #fff;
+        font-size: 1.5rem;
+        border-radius: 1rem;
+        transition: all 250ms;
+        transform-origin: center;
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25),
+        inset 0px -2px 3px rgba(0, 0, 0, 0.25);
+    }
+    button:hover {
+        cursor: pointer;
+        transform: scale(0.975);
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+
+    body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to top,
+    #ffd194 0%,     /* мягкий тёплый оранжевый у горизонта */
+    #ffcc70 10%,    /* светло-оранжевый */
+    #b7eaff 30%,    /* нежный голубой */
+    #6b9acc 60%,    /* небесно-синий */
+    #2b3467 80%,    /* сумеречный синий */
+    #1a1e3b 100%    /* тёмно-синий с лёгким фиолетом */
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  font-family: sans-serif;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(white 1px, transparent 0);
+  background-size: 10px 10px;
+  background-repeat: repeat;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
 }
