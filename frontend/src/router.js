@@ -1,12 +1,16 @@
 import { writable } from 'svelte/store'
 
-export const route = writable(window.location.pathname || '/')
+function getPath() {
+  return window.location.hash.slice(1) || '/'
+}
+
+export const route = writable(getPath())
 
 export function navigate(path) {
-  history.pushState({}, '', path + window.location.search)
+  window.location.hash = path
   route.set(path)
 }
 
-window.addEventListener('popstate', () => {
-  route.set(window.location.pathname || '/')
+window.addEventListener('hashchange', () => {
+  route.set(getPath())
 })

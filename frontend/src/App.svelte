@@ -7,7 +7,7 @@
   import Gift from './pages/Gift.svelte';
   import Success from './pages/Success.svelte';
 
-  let current = window.location.pathname || '/';
+  let current = window.location.hash.slice(1) || '/';
 
   const pages = {
     '/': Welcome,
