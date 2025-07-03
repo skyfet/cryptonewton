@@ -2,19 +2,18 @@
   "name": "star-pay-terminal",
   "version": "1.0.0",
   "description": "",
-  "main": "backend/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js",
+    "start": "node bot/bot.js",
     "bot": "node --env-file='.env' bot/bot.js",
     "test": "jest",
-    "build": "npm --prefix frontend run build"
+    "build": "npm --prefix frontend run deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.1.0",
     "node-telegram-bot-api": "^0.66.0"
   },
   "devDependencies": {
