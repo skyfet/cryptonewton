@@ -34,6 +34,13 @@ body {
   border-radius: 6px;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-evenly;
+}
+
 @media only screen and (max-width: 400px) {
   .btn {
     font-size: 14px;
