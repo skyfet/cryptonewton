@@ -31,7 +31,7 @@ body {
   color: var(--tg-button-text-color, #fff);
 }
 input[type="number"] {
-  padding: 8px;
+  padding: 10.5px;
   border: 1px solid var(--tg-hint-color, #ccc);
   border-radius: 4px;
   background: var(--tg-secondary-bg-color, #fff);

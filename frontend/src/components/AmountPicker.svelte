@@ -26,7 +26,7 @@
         class="amount {selected === a ? 'selected' : ''}"
         on:click={() => choose(a)}
       >
-        {a}
+        {a} ⭐
       </div>
     {/each}
     {#if selected != "custom"}
@@ -34,7 +34,7 @@
         class="amount {selected === 'custom' ? 'selected' : ''}"
         on:click={() => choose("custom")}
       >
-        Ввести
+        Своё
       </div>
     {/if}
     {#if selected === "custom"}
@@ -46,7 +46,8 @@
         on:input={() => onSelect(parseInt(custom) || 0)}
         min="1"
         max="250000"
-      />
+      /> 
+      <span style="margin-left: -38px; margin-top: 8px;">⭐</span>
     {/if}
   </div>
 </div>

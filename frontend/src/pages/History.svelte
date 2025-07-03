@@ -14,9 +14,9 @@
 </script>
 
 <div class="container">
-  <h2>История покупок</h2>
+  <h2>/history</h2>
   {#if records.length === 0}
-    <p>Нет записей</p>
+    <p>Вы сами пишете свою историю</p>
   {:else}
     <ul>
       {#each records as r}
