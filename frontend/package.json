@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "preview": "vite build --config ./config/vite.config.preview.js && vite preview --config ./config/vite.config.preview.js",
-    "deploy": "vite build --config ./config/vite.config.js"
+    "preview": "vite build --config ./vite.config.preview.js && vite preview --config ./vite.config.preview.js",
+    "deploy": "vite build --config ./vite.config.js"
   },
   "dependencies": {
     "svelte": "^4.2.0"
