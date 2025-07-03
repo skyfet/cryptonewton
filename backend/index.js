@@ -16,7 +16,7 @@ app.use('/', transactionsRoutes);
 app.use('/', inlineRoutes);
 
 if (require.main === module) {
-  app.get('/:path(*)', (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'index.html'));
   });
 
