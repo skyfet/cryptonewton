@@ -5,6 +5,7 @@
   import { tg } from '../tg.js';
   let amount = 0;
   let loading = false;
+  let done = false;
 
   async function confirm() {
     const userId = tg.initDataUnsafe?.user?.id;
@@ -13,8 +14,13 @@
     await new Promise(r => setTimeout(r, 5000));
     const res = await purchase(userId, amount);
     loading = false;
-    if (res.ok) navigate('/success');
-    else alert(res.error);
+    if (res.ok) {
+      done = true;
+      await new Promise(r => setTimeout(r, 800));
+      navigate('/success');
+    } else {
+      alert(res.error);
+    }
   }
 </script>
 
@@ -27,6 +33,11 @@
     <div class="overlay">
       <div class="spinner"></div>
       <p>Загрузка...</p>
+    </div>
+  {:else if done}
+    <div class="overlay">
+      <div class="check">✓</div>
+      <p>Готово</p>
     </div>
   {/if}
 
@@ -55,5 +66,22 @@
   @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+  }
+  .check {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--tg-button-color, #0077ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    font-size: 48px;
+    color: var(--tg-button-color, #0077ff);
+    animation: pop 0.5s ease;
+  }
+  @keyframes pop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
   }
   </style>
