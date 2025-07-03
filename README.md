@@ -6,53 +6,53 @@ This repository contains a simple proof-of-concept for a Telegram WebApp and bac
 
 ```
 star-pay-terminal/
-├── frontend/ (Telegram WebApp)
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── AmountPicker.svelte
-│   │   │   └── UsernameDisplay.svelte
-│   │   ├── pages/
-│   │   │   ├── Welcome.svelte
-│   │   │   ├── Buy.svelte
-│   │   │   ├── Gift.svelte
-│   │   │   └── Success.svelte
-│   │   ├── App.svelte
-│   │   ├── main.js 
-│   │   ├── tg.js
-│   │   └── api.js
-│   ├── package.json
-│   └── vite.config.js
-│
-├── backend/
-│   ├── controllers/
-│   │   ├── transactions.js
-│   │   └── inline.js
-│   ├── middleware/
-│   │   └── verifyTelegram.js
-│   ├── routes/
-│   │   ├── transactions.js
-│   │   └── inline.js
-│   ├── utils/
-│   │   └── telegramAPI.js
-│   ├── index.js
-│   └── package.json
-│
-├── database/
-│   └── schema.sql (optional)
-│
-└── bot/
-    ├── handlers/
-    │   ├── inlineQueryHandler.js
-    │   └── menuHandler.js
-    └── bot.js
+- frontend/ (Telegram WebApp)
+  - public/
+    - index.html
+  - src/
+    - components/
+      - AmountPicker.svelte
+      - UsernameDisplay.svelte
+    - pages/
+      - Welcome.svelte
+      - Buy.svelte
+      - Gift.svelte
+      - Success.svelte
+    - App.svelte
+    - main.js
+    - tg.js
+    - api.js
+  - package.json
+  - vite.config.js
+
+- backend/
+  - controllers/
+    - transactions.js
+    - inline.js
+  - middleware/
+    - verifyTelegram.js
+  - routes/
+    - transactions.js
+    - inline.js
+  - utils/
+    - telegramAPI.js
+  - index.js
+  - package.json
+
+- database/
+  - schema.sql (optional)
+
+- bot/
+  - handlers/
+    - inlineQueryHandler.js
+    - menuHandler.js
+  - bot.js
 ```
 
 ## Backend API
 
-- `POST /purchase` — buy stars for the current user.
-- `POST /gift` — gift stars to another user.
+- `POST /purchase` - buy stars for the current user.
+- `POST /gift` - gift stars to another user.
 
 All requests must be validated using Telegram HMAC and user information fetched from the Telegram API. Amounts must be between `1` and `250000`.
 
