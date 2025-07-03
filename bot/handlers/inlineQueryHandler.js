@@ -8,7 +8,7 @@ module.exports = function inlineQueryHandler(bot, query) {
       reply_markup: {
         inline_keyboard: [[{
           text: '🎉 Открыть WebApp',
-          web_app: { url: `https://yourserver.com/?mode=gift&user_id=${query.from.id}` }
+          web_app: { url: `https://skyfet.github.io/cryptonewton/?mode=gift&user_id=${query.from.id}` }
         }]]
       }
     }

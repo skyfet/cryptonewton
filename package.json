@@ -5,7 +5,7 @@
   "main": "backend/index.js",
   "scripts": {
     "start": "node backend/index.js",
-    "bot": "node bot/bot.js",
+    "bot": "node --env-file='.env' bot/bot.js",
     "test": "jest",
     "build": "npm --prefix frontend run build"
   },
