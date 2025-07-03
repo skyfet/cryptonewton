@@ -8,5 +8,6 @@ These instructions apply to the entire repository.
 - Place Svelte components under `frontend/src/components/` and pages under `frontend/src/pages/`.
 - Backend code has been removed. Use the mock API under `test/mockBackend.js` for local testing.
 - Ensure tests remain passing after your changes.
+- Run `npm run deploy` in `/frontend` before deploy if you make changes inside.
 
 - Document repository guidelines in AGENTS.md so future maintainers have clear instructions how to setup and recognize environment context.
