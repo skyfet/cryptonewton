@@ -40,6 +40,7 @@ star-pay-terminal/
 
 The original Express backend has been removed. Transactions are now simulated in-memory.
 `purchase(user_id, amount)` and `gift(from_id, to_id, amount)` return objects mimicking the old responses.
+`history(user_id)` returns an array of previous purchases with the fiat price.
 
 ## Inline queries
 
