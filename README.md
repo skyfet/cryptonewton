@@ -19,7 +19,7 @@ star-pay-terminal/
 │   │   │   ├── Gift.svelte
 │   │   │   └── Success.svelte
 │   │   ├── App.svelte
-│   │   ├── main.js
+│   │   ├── main.js 
 │   │   ├── tg.js
 │   │   └── api.js
 │   ├── package.json
