@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
   import { cn } from "./../lib/utils";
   import { onMount } from "svelte";
 
   export let number = 10;
-  let meteorStyles: any = [];
-  let changeMeteors = (num: number) => {
+  let meteorStyles = [];
+  function changeMeteors(num) {
     meteorStyles = [];
     const styles = [...new Array(num)].map(() => ({
       top: -20,
@@ -13,7 +13,7 @@
       animationDuration: Math.floor(Math.random() * 8 + 2.9) + "s",
     }));
     meteorStyles = styles;
-  };
+  }
   onMount(() => {
     changeMeteors(number);
   });
