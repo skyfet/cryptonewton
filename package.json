@@ -14,7 +14,9 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "node-telegram-bot-api": "^0.66.0"
+    "@tailwindcss/vite": "^4.1.11",
+    "node-telegram-bot-api": "^0.66.0",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "jest": "^30.0.3",
