@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { navigate } from '../router.js';
+  import RippleButton from '../components/RippleButton.svelte';
   let purchase = null;
 
   onMount(() => {
@@ -14,7 +15,7 @@
     <p>Вы купили {purchase.amount} ⭐ за ${purchase.fiat.toFixed(2)}</p>
     <p class="time">{new Date(purchase.time).toLocaleString()}</p>
   {/if}
-  <button class="btn" on:click={() => navigate('/')}>На главную</button>
+  <RippleButton onClick={() => navigate('/')}>На главную</RippleButton>
 </div>
 
 <style>
