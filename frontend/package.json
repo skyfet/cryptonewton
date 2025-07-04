@@ -9,7 +9,9 @@
     "deploy": "vite build --config ./vite.config.js"
   },
   "dependencies": {
-    "svelte": "^4.2.0"
+    "clsx": "^2.1.1",
+    "svelte": "^4.2.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.0",
