@@ -3,6 +3,7 @@
   import LoadingOverlay from "../components/LoadingOverlay.svelte";
   import { purchase } from "../api.js";
   import { navigate } from "../router.js";
+  import RippleButton from "../components/RippleButton.svelte";
   import { tg } from "../tg.js";
   const PRICE_USD = 0.05;
   let amount = 0;
@@ -28,10 +29,10 @@
 </script>
 
 <div class="container">
-  <h2><button class="btn" on:click={() => navigate("/")}>🢀</button> Сколько желаете?</h2>
+  <h2><RippleButton onClick={() => navigate("/")}>🢀</RippleButton> Сколько желаете?</h2>
   <AmountPicker onSelect={(val) => (amount = val)} />
 
-  <button style="margin-top: 8px;" class="btn" on:click={confirm} disabled={loading}>Купить</button>
+  <RippleButton onClick={confirm} disabled={loading} style="margin-top: 8px;">Купить</RippleButton>
 </div>
 
 {#if loading}

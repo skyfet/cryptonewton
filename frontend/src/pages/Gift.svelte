@@ -4,6 +4,7 @@
   import { navigate } from '../router.js';
   import { tg } from '../tg.js';
   import { gift } from '../api.js';
+  import RippleButton from '../components/RippleButton.svelte';
 
   let amount = 0;
   const params = new URLSearchParams(window.location.search);
@@ -22,5 +23,5 @@
 <div class="container">
   <UsernameDisplay username={toId} />
   <AmountPicker onSelect={val => amount = val} />
-  <button class="btn" on:click={confirm}>Подарить</button>
+  <RippleButton onClick={confirm}>Подарить</RippleButton>
 </div>
