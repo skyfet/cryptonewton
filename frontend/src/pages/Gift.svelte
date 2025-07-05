@@ -9,6 +9,7 @@
   let amount = 0;
   const params = new URLSearchParams(window.location.search);
   const toId = params.get('user_id');
+  const username = params.get('username') || toId;
 
   function confirm() {
     const fromId = tg.initDataUnsafe?.user?.id;
@@ -34,7 +35,7 @@
 
 <div class="container">
   <RippleButton onClick={() => navigate("/")}>←</RippleButton>
-  <UsernameDisplay username={toId} />
+  <UsernameDisplay username={username} />
   <AmountPicker onSelect={val => amount = val} />
   <RippleButton kind="gift" onClick={confirm}>Подарить</RippleButton>
 </div>
