@@ -41,19 +41,22 @@ body {
   }
 }
 
+
 .amounts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
   margin-top: 20px;
 }
 
 .amount {
-  padding: 10px 15px;
+  padding: 18px;
+  font-size: 18px;
+  text-align: center;
   background: var(--tg-secondary-bg-color, #fff);
   border: 1px solid var(--tg-hint-color, #ccc);
   color: var(--tg-text-color, #333);
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -62,14 +65,26 @@ body {
   color: var(--tg-button-text-color, #fff);
 }
 
+.custom-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.custom-field input {
+  flex: 1;
+}
+
 input[type="number"] {
-  padding: 10.5px;
+  padding: 16px;
   border: 1px solid var(--tg-hint-color, #ccc);
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--tg-secondary-bg-color, #fff);
   color: inherit;
   text-align: center;
-  font-size: large;
+  font-size: 18px;
+  width: 100%;
   -moz-appearance: textfield;
 }
 
