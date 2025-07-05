@@ -33,8 +33,7 @@
 </script>
 
 <div class="container">
-  <RippleButton onClick={() => navigate("/")}>🢀</RippleButton>
-  <h2> Сколько желаете?</h2>
+  <RippleButton onClick={() => navigate("/")}>←</RippleButton>
   <UsernameDisplay username={toId} />
   <AmountPicker onSelect={val => amount = val} />
   <RippleButton kind="gift" onClick={confirm}>Подарить</RippleButton>

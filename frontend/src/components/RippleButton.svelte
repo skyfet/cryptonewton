@@ -55,13 +55,13 @@
       linear-gradient(to right, #28364a, #162033);
   }
   .ripple-btn.buy {
-    background: linear-gradient(45deg, #00ffcc88, #ccff0088, #cc00ff88);
-    background-size: 200% 200%;
+    background: linear-gradient(45deg, #00ffee88, #32046388);
+    background-size: 500% 500%;
     margin-top: 12px;
-    animation: gift-gradient 4s linear infinite;
+    animation: gift-gradient 8s linear infinite;
   }
   .ripple-btn.gift {
-    background: linear-gradient(45deg, #ff00cc88, #ffcc0088, #00e0ff88);
+    background: linear-gradient(30deg, #e0990bcc, #c53a2dee);
     background-size: 200% 200%;
     margin-top: 12px;
     animation: gift-gradient 4s linear infinite;

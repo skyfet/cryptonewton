@@ -30,7 +30,7 @@
 </script>
 
 <div class="container">
-  <RippleButton onClick={() => navigate("/")}>🢀</RippleButton> 
+  <RippleButton onClick={() => navigate("/")}>←</RippleButton>
   <h2>Сколько желаете?</h2>
   <AmountPicker onSelect={(val) => (amount = val)} />
 
