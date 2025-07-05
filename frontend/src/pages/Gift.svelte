@@ -2,7 +2,6 @@
   import AmountPicker from '../components/AmountPicker.svelte';
   import UsernameDisplay from '../components/UsernameDisplay.svelte';
   import { navigate } from '../router.js';
-  import { tg } from '../tg.js';
   import { gift } from '../api.js';
   import RippleButton from '../components/RippleButton.svelte';
 
@@ -12,7 +11,7 @@
   const username = params.get('username') || toId;
 
   function confirm() {
-    const fromId = tg.initDataUnsafe?.user?.id;
+    const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
     if (!fromId || !toId || amount < 1) return;
     gift(fromId, parseInt(toId, 10), amount).then(res => {
       if (res.ok) {
