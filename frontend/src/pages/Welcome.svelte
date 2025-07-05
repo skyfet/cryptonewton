@@ -14,7 +14,7 @@
     <RippleButton onClick={() => navigate("/buy")}
       >🌟 Купить звёзды</RippleButton
     >
-    <RippleButton onClick={() => navigate("/buy")}
+    <RippleButton kind="gift" onClick={() => navigate("/gift")}
       >🎁 Подарить звёзды</RippleButton
     >
   </div>

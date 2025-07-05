@@ -15,6 +15,7 @@
     loading = true;
     await new Promise(r => setTimeout(r, 2000));
     const tx = {
+      type: 'purchase',
       amount,
       fiat: amount * PRICE_USD,
       time: Date.now()

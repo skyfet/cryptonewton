@@ -1,6 +1,7 @@
 <script>
   export let onClick = () => {};
   export let disabled = false;
+  export let kind = '';
   let ripples = [];
 
   function createRipple(event) {
@@ -17,7 +18,7 @@
   }
 </script>
 
-<button class="ripple-btn" on:click={createRipple} disabled={disabled}>
+<button class="ripple-btn {kind}" on:click={createRipple} disabled={disabled}>
   <slot></slot>
   <span class="ripple-box">
     {#each ripples as r (r.key)}
@@ -38,7 +39,10 @@
     justify-content: center;
     padding: 16px;
     width: 100%;
-    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    background:
+      radial-gradient(#ffffff22 1px, transparent 1px) 0 0/3px 3px,
+      radial-gradient(#ffffff22 1px, transparent 1px) 1.5px 1.5px/3px 3px,
+      linear-gradient(to right, #1e293b, #0f172a);
     color: var(--tg-button-text-color, #fff);
     border-radius: 8px;
     font-size: 16px;
@@ -46,7 +50,15 @@
     transition: background 0.3s;
   }
   .ripple-btn:hover {
-    background: linear-gradient(to right, #818cf8, #a78bfa);
+    background:
+      radial-gradient(#ffffff22 1px, transparent 1px) 0 0/3px 3px,
+      radial-gradient(#ffffff22 1px, transparent 1px) 1.5px 1.5px/3px 3px,
+      linear-gradient(to right, #28364a, #162033);
+  }
+  .ripple-btn.gift {
+    background: linear-gradient(45deg, #ff00cc, #ffcc00, #00e0ff);
+    background-size: 200% 200%;
+    animation: gift-gradient 4s linear infinite;
   }
   .ripple-box {
     pointer-events: none;
@@ -64,6 +76,17 @@
     to {
       transform: scale(4);
       opacity: 0;
+    }
+  }
+  @keyframes gift-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 </style>
