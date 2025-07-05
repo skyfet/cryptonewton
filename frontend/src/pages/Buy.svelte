@@ -30,10 +30,11 @@
 </script>
 
 <div class="container">
-  <h2><RippleButton onClick={() => navigate("/")}>🢀</RippleButton> Сколько желаете?</h2>
+  <RippleButton onClick={() => navigate("/")}>🢀</RippleButton> 
+  <h2>Сколько желаете?</h2>
   <AmountPicker onSelect={(val) => (amount = val)} />
 
-  <RippleButton onClick={confirm} disabled={loading} style="margin-top: 8px;">Купить</RippleButton>
+  <RippleButton kind='buy' onClick={confirm} disabled={loading} style="margin-top: 8px;">Купить</RippleButton>
 </div>
 
 {#if loading}
