@@ -38,10 +38,14 @@
     justify-content: center;
     padding: 16px;
     width: 100%;
-    background: var(--tg-button-color, #0077ff);
-    color: var(--tg-button-text-color, #fff);
+    background: transparent;
+    color: var(--tg-button-color, #00e5ff);
+    border: 2px solid var(--tg-button-color, #00e5ff);
     border-radius: 8px;
     font-size: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
   }
   .ripple-box {
     pointer-events: none;
@@ -51,7 +55,7 @@
   .ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 229, 255, 0.3);
     transform: scale(0);
     animation: ripple 0.6s linear;
   }
