@@ -44,7 +44,6 @@
       linear-gradient(to right, #1e293b, #0f172a);
     color: var(--tg-button-text-color, #fff);
     border-radius: 8px;
-    font-size: 16px;
     font-weight: 600;
     transition: background 0.3s;
   }
