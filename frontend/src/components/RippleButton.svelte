@@ -38,8 +38,8 @@
     justify-content: center;
     padding: 16px;
     width: 100%;
-    background: #fff;
-    color: #000;
+    background: var(--tg-button-color, #0077ff);
+    color: var(--tg-button-text-color, #fff);
     border-radius: 8px;
     font-size: 16px;
   }

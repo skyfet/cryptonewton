@@ -60,7 +60,7 @@ body {
   padding: 10px 15px;
   background: var(--tg-secondary-bg-color, #fff);
   border: 1px solid var(--tg-hint-color, #ccc);
-  color: #333;
+  color: var(--tg-text-color, #333);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -90,7 +90,7 @@ input::-webkit-inner-spin-button {
 button {
   border: none;
   padding: 0.5rem 2rem;
-  color: #fff;
+  color: var(--tg-button-text-color, #fff);
   font-size: 1.5rem;
   border-radius: 1rem;
   transition: all 250ms;
