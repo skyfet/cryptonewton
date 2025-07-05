@@ -4,11 +4,13 @@
   import { navigate } from '../router.js';
   import { gift } from '../api.js';
   import RippleButton from '../components/RippleButton.svelte';
+  import UserSearch from '../components/UserSearch.svelte';
 
   let amount = 0;
   const params = new URLSearchParams(window.location.search);
-  const toId = params.get('user_id');
-  const username = params.get('username') || toId;
+  let toId = params.get('user_id');
+  let username = params.get('username') || '';
+
 
   function confirm() {
     const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
@@ -34,7 +36,10 @@
 
 <div class="container">
   <RippleButton onClick={() => navigate("/")}>←</RippleButton>
-  <UsernameDisplay username={username} />
+  <UserSearch />
+  {#if toId}
+    <UsernameDisplay username={username || toId} />
+  {/if}
   <AmountPicker onSelect={val => amount = val} />
   <RippleButton kind="gift" onClick={confirm}>Подарить</RippleButton>
 </div>
