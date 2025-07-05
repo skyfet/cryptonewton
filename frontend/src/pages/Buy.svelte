@@ -1,16 +1,14 @@
 <script>
   import AmountPicker from "../components/AmountPicker.svelte";
   import LoadingOverlay from "../components/LoadingOverlay.svelte";
-  import { purchase } from "../api.js";
   import { navigate } from "../router.js";
   import RippleButton from "../components/RippleButton.svelte";
-  import { tg } from "../tg.js";
   const PRICE_USD = 0.05;
   let amount = 0;
   let loading = false;
 
   async function confirm() {
-    const userId = tg.initDataUnsafe?.user?.id;
+    const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
     if (!userId || amount < 1) return;
     loading = true;
     await new Promise(r => setTimeout(r, 2000));

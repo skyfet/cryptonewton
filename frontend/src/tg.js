@@ -1,6 +1,6 @@
-export const tg = window.Telegram.WebApp;
 
 export function initTelegram() {
+  const tg = window.Telegram.WebApp;
   if (!tg) return;
   tg.expand();
   tg.ready();
