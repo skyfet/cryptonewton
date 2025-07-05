@@ -21,8 +21,9 @@
 
 <style>
   .card {
-    background: var(--tg-secondary-bg-color, #fff);
-    color: var(--tg-text-color, #000);
+    background: var(--tg-secondary-bg-color, #1f2937);
+    color: var(--tg-text-color, #f8fafc);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 10px;
@@ -37,6 +38,6 @@
   .details {
     margin-top: 8px;
     font-size: 14px;
-    color: var(--tg-hint-color, #555);
+    color: var(--tg-hint-color, #cbd5e1);
   }
 </style>

@@ -38,10 +38,15 @@
     justify-content: center;
     padding: 16px;
     width: 100%;
-    background: var(--tg-button-color, #0077ff);
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
     color: var(--tg-button-text-color, #fff);
     border-radius: 8px;
     font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  .ripple-btn:hover {
+    background: linear-gradient(to right, #818cf8, #a78bfa);
   }
   .ripple-box {
     pointer-events: none;
