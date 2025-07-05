@@ -22,7 +22,8 @@
 <div>
   <div class="amounts">
     {#each PRESETS as a}
-      <div
+      <button
+        type="button"
         class="amount {selected === a ? 'selected' : ''}"
         on:click={() => choose(a)}
       >
@@ -30,28 +31,29 @@
         <span class="star {selected === a ? 'sparkle' : ''}">
           {selected === a ? '🌟' : '⭐'}
         </span>
-      </div>
+      </button>
     {/each}
     {#if selected != "custom"}
-      <div
+      <button
+        type="button"
         class="amount {selected === 'custom' ? 'selected' : ''}"
         on:click={() => choose("custom")}
       >
         Своё
-      </div>
+      </button>
     {/if}
     {#if selected === "custom"}
-      <input
-        bind:this={amountInput}
-        class="amount {selected === 'custom' ? 'selected' : ''}"
-        type="number"
-        bind:value={custom}
-        on:input={() => onSelect(parseInt(custom) || 0)}
-        min="1"
-        max="250000"
-      />
-      <span class="star {selected === 'custom' ? 'sparkle' : ''}"
-            style="margin-left: -38px; margin-top: 8px;">⭐</span>
+      <div class="amount custom-field {selected === 'custom' ? 'selected' : ''}">
+        <input
+          bind:this={amountInput}
+          type="number"
+          bind:value={custom}
+          on:input={() => onSelect(parseInt(custom) || 0)}
+          min="1"
+          max="250000"
+        />
+        <span class="star {selected === 'custom' ? 'sparkle' : ''}">⭐</span>
+      </div>
     {/if}
   </div>
 </div>
