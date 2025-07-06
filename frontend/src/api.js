@@ -20,3 +20,10 @@ export async function getHistory(user_id) {
   const res = await fetch(`/history?user_id=${user_id}`);
   return res.json();
 }
+
+export async function searchUser(query) {
+  const res = await fetch(`/search?q=${encodeURIComponent(query)}`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data.ok ? data.result : null;
+}

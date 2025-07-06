@@ -16,11 +16,13 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "node-telegram-bot-api": "^0.66.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "jest": "^30.0.3",
-    "supertest": "^7.1.1"
+    "supertest": "^7.1.1",
+    "nock": "^13.4.0"
   },
   "jest": {
     "testEnvironment": "node"
