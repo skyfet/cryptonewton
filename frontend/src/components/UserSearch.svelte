@@ -2,7 +2,7 @@
   import { searchUser } from '../api.js'
   let query = ''
   async function search() {
-    const result = await searchUser(query)
+    const result = await searchUser(query.trim())
     if (result) {
       const params = new URLSearchParams(window.location.search)
       params.set('user_id', result.id)
