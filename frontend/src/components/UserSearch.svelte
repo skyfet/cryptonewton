@@ -1,9 +1,15 @@
 <script>
+  import { searchUser } from '../api.js'
   let query = ''
-  function search() {
-    const tg = window.Telegram.WebApp
-    if (tg?.switchInlineQuery) {
-      tg.switchInlineQuery(query)
+  async function search() {
+    const result = await searchUser(query)
+    if (result) {
+      const params = new URLSearchParams(window.location.search)
+      params.set('user_id', result.id)
+      params.set('username', result.username)
+      window.location.search = params.toString()
+    } else {
+      alert('Пользователь не найден')
     }
   }
 </script>
