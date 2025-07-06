@@ -5,7 +5,7 @@
   let records = [];
 
   onMount(() => {
-    records = JSON.parse(localStorage.getItem("history") || "[]");
+    records = JSON.parse(localStorage.getItem("history") || "[]").reverse();
   });
 </script>
 

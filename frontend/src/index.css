@@ -163,7 +163,7 @@ button:active {
 }
 
 .fancy-text {
-  background: linear-gradient(90deg,#ff8a00,#e52e71);
+  background: #eee;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
