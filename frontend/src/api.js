@@ -22,7 +22,7 @@ export async function getHistory(user_id) {
 }
 
 export async function searchUser(query) {
-  const res = await fetch(`/search?q=${encodeURIComponent(query)}`);
+  const res = await fetch(`t.me/${encodeURIComponent(query)}`);
   if (!res.ok) return null;
   const data = await res.json();
   return data.ok ? data.result : null;

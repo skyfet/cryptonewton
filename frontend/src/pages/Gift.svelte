@@ -5,6 +5,7 @@
   import { gift } from '../api.js';
   import RippleButton from '../components/RippleButton.svelte';
   import UserSearch from '../components/UserSearch.svelte';
+  import { ArrowLeft } from "@lucide/svelte";
 
   let amount = 0;
   const params = new URLSearchParams(window.location.search);
@@ -35,7 +36,7 @@
 </script>
 
 <div class="container">
-  <RippleButton onClick={() => navigate("/")}>←</RippleButton>
+  <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
   <UserSearch />
   {#if toId}
     <UsernameDisplay username={username || toId} />
