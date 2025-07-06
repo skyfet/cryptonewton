@@ -1,6 +1,7 @@
-import './index.css'
-import App from './App.svelte'
+// main.js (или main.ts)
+import App from './App.svelte';
+import { mount } from 'svelte';
 
-new App({
-  target: document.getElementById('root')
-})
+const app = mount(App, { target: document.getElementById("root") });
+
+export default app;
