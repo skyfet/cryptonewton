@@ -4,7 +4,7 @@
   import { navigate } from "../router.js";
   import RippleButton from "../components/RippleButton.svelte";
   import { ArrowLeft } from "@lucide/svelte";
-  const PRICE_RUB = 2;
+  const PRICE_RUB = 1.42;
   let amount = 0;
   let loading = false;
 

@@ -8,7 +8,7 @@
 <div class="cosmo-bg">
   <lottie-player
     id="cosmo"
-    src="/1751881123755.json"
+    src="./1751881123755.json"
     autoplay
     loop
   >
