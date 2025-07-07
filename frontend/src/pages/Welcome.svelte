@@ -11,7 +11,6 @@
     src="/src/assets/1751881123755.json"
     autoplay
     loop
-    on:load={handleLoad}
   >
   </lottie-player>
 </div>
