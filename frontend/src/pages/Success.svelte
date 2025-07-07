@@ -46,7 +46,7 @@
   .success {
     color: #ffa;
     font-weight: bold;
-    font-size: 48px;
+    font-size: 32px;
     text-shadow:
       #fa5 0px 0 10px,
       #5af 2px 0 20px;
