@@ -16,7 +16,7 @@
       <div>
         <h2 class="success amounts">
           {purchase.amount}
-          <lottie-player id="stars-bg" src="./1751909616946.json" autoplay loop>
+          <lottie-player id="stars-bg" src="./1751909760808.json" autoplay loop>
           </lottie-player>
         </h2>
       </div>
@@ -43,11 +43,10 @@
     right: 0;
     z-index: -1;
   }
-
   .success {
     color: #ffa;
     font-weight: bold;
-    font-size: 47px;
+    font-size: 48px;
     text-shadow:
       #fa5 0px 0 10px,
       #5af 2px 0 20px;
