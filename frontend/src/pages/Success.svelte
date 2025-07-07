@@ -44,7 +44,7 @@
     z-index: -1;
   }
   .success {
-    color: #ff5;
+    color: #ff5e;
     font-weight: bold;
     font-size: 32px;
     text-shadow:

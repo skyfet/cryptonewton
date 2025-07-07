@@ -27,6 +27,8 @@
   .button-group {
     display: flex;
     justify-content: center;
+    align-content: center;
+    align-self: center;
     align-items: center;
     width: 100%;
   }
