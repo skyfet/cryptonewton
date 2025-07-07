@@ -37,6 +37,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-top: 12px;
     padding: 16px;
     background:
       radial-gradient(#ffffff22 1px, transparent 1px) 0 0/3px 3px,
@@ -54,17 +55,13 @@
       linear-gradient(to right, #28364a, #162033);
   }
   .ripple-btn.buy {
-    width: 300px;
     background: linear-gradient(45deg, #00ffee88, #32046388, #eeaaffbb);
     background-size: 200% 200%;
-    margin-top: 12px;
     animation: gift-gradient 8s linear infinite;
   }
   .ripple-btn.gift {
-    width: 300px;
     background: linear-gradient(30deg, #e0990bcc, #c53a2dee, #ec7c32bb);
     background-size: 200% 200%;
-    margin-top: 12px;
     animation: gift-gradient 4s linear infinite;
   }
   .ripple-box {

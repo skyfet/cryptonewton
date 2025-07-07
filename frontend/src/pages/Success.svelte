@@ -24,9 +24,16 @@
       <p class="time">{new Date(purchase.time).toLocaleString()}</p> -->
     {/if}
   </div>
-  <RippleButton onClick={() => navigate("/")}
-    >На главную</RippleButton
-  >
+
+  <div class="button-group">
+    <RippleButton kind="buy" onClick={() => navigate("/buy")}
+      >🌟 Купить ещё</RippleButton
+    >
+    <RippleButton kind="gift" onClick={() => navigate("/gift")}
+      >🎁 Подарить другу</RippleButton
+    >
+    <RippleButton onClick={() => navigate("/")}>На главную</RippleButton>
+  </div>
 </div>
 
 <style>
