@@ -43,18 +43,20 @@
     right: 0;
     z-index: -1;
   }
+
+  .success {
+    color: #ffa;
+    font-weight: bold;
+    font-size: 47px;
+    text-shadow:
+      #fa5 0px 0 10px,
+      #5af 2px 0 20px;
+  }
   .amounts {
     font-size: 88px;
     display: block;
     position: relative;
   }
-  .success {
-    color: #ffa;
-    font-weight: bold;
-    font-size: 47px;
-    text-shadow: #fa5 0px 0 10px, #5af 2px 0 20px;
-  }
-
   @keyframes spin {
     0% {
       transform: scale(0) rotate(0deg);
