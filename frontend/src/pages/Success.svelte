@@ -10,25 +10,32 @@
 </script>
 
 <div class="container">
-  <div class="star sparkle">⭐</div>
-  {#if purchase}
-    <p>Вы купили!</p>
-    <h2>{purchase.amount} ⭐</h2>
-    <p>за ${purchase.fiat.toFixed(2)}₽</p>
-    <p class="time">{new Date(purchase.time).toLocaleString()}</p>
-  {/if}
-  <RippleButton onClick={() => navigate("/")}>На главную</RippleButton>
+  <div style="margin-top: 50px; margin-bottom: 150px;">
+    {#if purchase}
+      <h2 style="color: #ffa; font-weight: bold; font-size: 47px;">
+        Успешно купили!
+      </h2>
+      <h2 style="font-size: 88px; display: block; position: relative;">
+        {purchase.amount}
+        <lottie-player id="stars" src="./1751906850269.json" autoplay loop>
+        </lottie-player>
+      </h2>
+      <!-- <p>за ${purchase.fiat.toFixed(2)}₽</p>
+      <p class="time">{new Date(purchase.time).toLocaleString()}</p> -->
+    {/if}
+  </div>
+  <RippleButton onClick={() => navigate("/")}
+    >На главную</RippleButton
+  >
 </div>
 
 <style>
-  .container {
-    color: #222;
-  }
-  .star {
-    color: #222;
-    font-size: 64px;
-    animation: spin 1.5s ease;
-    margin: 20px auto;
+  #stars {
+    position: fixed;
+    top: 0%;
+    bottom: 0;
+    z-index: -1;
+    /* height: 150px; */
   }
   @keyframes spin {
     0% {
@@ -43,6 +50,5 @@
   }
   .time {
     font-size: 14px;
-    color: #222;
   }
 </style>

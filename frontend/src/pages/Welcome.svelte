@@ -5,10 +5,6 @@
   import "@lottiefiles/lottie-player";
 </script>
 
-<div class="cosmo-bg">
-  <lottie-player id="cosmo" src="./1751881123755.json" autoplay loop>
-  </lottie-player>
-</div>
 <h2 class="cosmo-header">Star ⭐ Pay Terminal</h2>
 <div class="container">
   <div class="button-group">
@@ -34,35 +30,12 @@
     align-items: center;
     width: 100%;
   }
-  #cosmo {
-    position: absolute;
-    width: 100vw;
-    height: auto;
-    pointer-events: none; /* важно для кликов */
-  }
-
-  .cosmo-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: -1;
-  }
 
   .cosmo-header {
     margin-top: 46px;
     margin-bottom: 64px;
   }
   @media screen and (orientation: portrait) {
-    #cosmo {
-      transform: translate(-50%, -50%);
-      top: 50%;
-      min-width: 200vh;
-      left: 10%;
-      animation: gift-gradient 24s ease-in-out infinite;
-    }
     @keyframes gift-gradient {
       0% {
         left: 100%;

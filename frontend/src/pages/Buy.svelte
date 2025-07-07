@@ -9,8 +9,8 @@
   let loading = false;
 
   async function confirm() {
-    const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
-    if (!userId || amount < 1) return;
+    const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
+    // if (!userId || amount < 1) return;
     loading = true;
     await new Promise((r) => setTimeout(r, 2000));
     const tx = {
@@ -39,7 +39,7 @@
 </script>
 
 <div class="container">
-  <div style="color: #222;">
+  <div style="color: #fff;">
     <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
     <h2 style="display: inline-block;">Пополнение Звёзд</h2>
   </div>

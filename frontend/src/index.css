@@ -104,6 +104,7 @@ h2 {
   font-size: x-large;
   text-align: center;
   padding: 24px;
+  color: #fff;
 }
 
 button {
@@ -142,10 +143,7 @@ button:active {
   position: relative;
 }
 .star {
-  margin-left: 4px;
   display: inline-block;
-  position: absolute;
-  right: 24px;
 }
 
 .sparkle {
