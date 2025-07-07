@@ -10,7 +10,7 @@
 </script>
 
 <div class="container">
-  <div style="margin-top: 0px; margin-bottom: 70px;">
+  <div style="margin-top: 0px; margin-bottom: 50px;">
     {#if purchase}
       <h2 class="success">Успешно куплено!</h2>
       <div>
