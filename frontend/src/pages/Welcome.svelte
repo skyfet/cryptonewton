@@ -36,14 +36,9 @@
   }
   #cosmo {
     position: absolute;
-    top: 50%;
-    left: 10%;
-    min-width: 200vh;
-    /* min-width: 100vw; */
-    min-height: 100vh;
-    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: auto;
     pointer-events: none; /* важно для кликов */
-    animation: gift-gradient 24s ease-in-out infinite;
   }
 
   .cosmo-bg {
@@ -60,6 +55,26 @@
     margin-top: 46px;
     margin-bottom: 64px;
   }
+  @media screen and (orientation: portrait) {
+    #cosmo {
+      transform: translate(-50%, -50%);
+      top: 50%;
+      min-width: 200vh;
+      left: 10%;
+      animation: gift-gradient 24s ease-in-out infinite;
+    }
+    @keyframes gift-gradient {
+      0% {
+        left: 100%;
+      }
+      50% {
+        left: 1%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+  }
 
   @media screen and (min-width: 444px) and (max-width: 749px) {
     .cosmo-header {
@@ -71,17 +86,6 @@
     .cosmo-header {
       margin-top: 0px;
       margin-bottom: 20px;
-    }
-  }
-  @keyframes gift-gradient {
-    0% {
-      left: 100%;
-    }
-    50% {
-      left: 1%;
-    }
-    100% {
-      left: 100%;
     }
   }
 </style>
