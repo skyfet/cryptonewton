@@ -19,7 +19,6 @@
 </div>
 
 <style>
- 
   .container {
     position: relative;
     width: 100%;
@@ -33,9 +32,10 @@
   }
 
   .cosmo-header {
-    margin-top: 46px;
-    margin-bottom: 64px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
+
   @media screen and (orientation: portrait) {
     @keyframes gift-gradient {
       0% {
@@ -47,19 +47,6 @@
       100% {
         left: 100%;
       }
-    }
-  }
-
-  @media screen and (min-width: 444px) and (max-width: 749px) {
-    .cosmo-header {
-      margin-top: 80px;
-      margin-bottom: 120px;
-    }
-  }
-  @media screen and (min-width: 750px) {
-    .cosmo-header {
-      margin-top: 0px;
-      margin-bottom: 20px;
     }
   }
 </style>

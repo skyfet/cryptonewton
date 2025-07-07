@@ -10,14 +10,14 @@
 </script>
 
 <div class="container">
-  <div style="margin-top: 50px; margin-bottom: 20px;">
+  <div style="margin-top: 0px; margin-bottom: 70px;">
     {#if purchase}
       <h2 style="color: #ffa; font-weight: bold; font-size: 47px;">
         Успешно куплено!
       </h2>
       <h2 style="font-size: 88px; display: block; position: relative;">
         {purchase.amount}
-        <lottie-player id="stars" src="./1751906850269.json" autoplay loop>
+        <lottie-player id="stars" src="./1751906734332.json" autoplay loop>
         </lottie-player>
       </h2>
       <!-- <p>за ${purchase.fiat.toFixed(2)}₽</p>
@@ -38,8 +38,10 @@
 
 <style>
   #stars {
-    position: fixed;
+    position: absolute;
     top: 0%;
+    right: -15%;
+    height: 200px;
     bottom: 0;
     z-index: -1;
     /* height: 150px; */
