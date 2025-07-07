@@ -10,7 +10,7 @@
 </script>
 
 <div class="container">
-  <div style="margin-top: 50px; margin-bottom: 150px;">
+  <div style="margin-top: 50px; margin-bottom: 20px;">
     {#if purchase}
       <h2 style="color: #ffa; font-weight: bold; font-size: 47px;">
         Успешно куплено!
@@ -54,8 +54,5 @@
     100% {
       transform: scale(1) rotate(360deg);
     }
-  }
-  .time {
-    font-size: 14px;
   }
 </style>
