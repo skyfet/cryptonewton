@@ -15,11 +15,13 @@
       <h2 style="color: #ffa; font-weight: bold; font-size: 47px;">
         Успешно куплено!
       </h2>
-      <h2 style="font-size: 88px; display: block; position: relative;">
-        {purchase.amount}
-        <lottie-player id="stars" src="./1751906734332.json" autoplay loop>
-        </lottie-player>
-      </h2>
+      <div>
+        <h2 style="font-size: 88px; display: block; position: relative;">
+          {purchase.amount}
+          <lottie-player id="stars" src="./1751906734332.json" autoplay loop>
+          </lottie-player>
+        </h2>
+      </div>
       <!-- <p>за ${purchase.fiat.toFixed(2)}₽</p>
       <p class="time">{new Date(purchase.time).toLocaleString()}</p> -->
     {/if}
@@ -40,7 +42,7 @@
   #stars {
     position: absolute;
     top: 0%;
-    right: -15%;
+    right: -180px;
     height: 200px;
     bottom: 0;
     z-index: -1;
