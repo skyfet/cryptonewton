@@ -28,7 +28,7 @@
       >
         {a}
         <span class="star {selected === a ? 'sparkle' : ''}">
-          {selected === a ? '🌟' : '⭐'}
+          {selected === a ? "🌟" : "⭐"}
         </span>
       </div>
     {/each}
@@ -41,14 +41,24 @@
       </div>
     {/if}
     {#if selected === "custom"}
-      <div class="amount custom-field {selected === 'custom' ? 'selected' : ''}">
+      <div
+        class="amount custom-field {selected === 'custom' ? 'selected' : ''}"
+      >
         <input
           bind:this={amountInput}
           type="number"
           bind:value={custom}
-          on:input={() => onSelect(parseInt(custom) || 0)}
+          on:input={() =>
+            onSelect(
+              parseInt(custom) || 0 <= 10000
+                ? parseInt(custom)
+                : parseInt(custom) >= 0
+                  ? 10000
+                  : 0
+            )}
           min="1"
-          max="250000"
+          max="10000"
+          
         />
         <span class="star {selected === 'custom' ? 'sparkle' : ''}">⭐</span>
       </div>

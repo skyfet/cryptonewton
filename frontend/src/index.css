@@ -5,10 +5,11 @@ body {
   min-height: 100vh;
   font-family: 'Merriweather', serif;
   color: var(--tg-text-color, #fff);
-  background: linear-gradient(45deg, #322,#223,#232);
+  background: linear-gradient(180deg, rgb(255, 252, 252),#ffffff,rgb(252, 252, 248));
 }
 
 .container {
+  width: 100%;
   padding: 24px;
 }
 
@@ -58,9 +59,9 @@ body {
 }
 
 .amount.selected {
-  background: linear-gradient(45deg, #cac41dd1, #b76c1b);
-background-size: 500% 500%;
-    animation: gift-gradient 8s linear infinite;
+  background: linear-gradient(45deg, #faee47bc, #fd99ffbc);
+background-size: 200% 200%;
+    animation: gift-gradient 4s linear infinite;
   color: var(--tg-button-text-color, #fff);
 }
 
@@ -77,19 +78,19 @@ background-size: 500% 500%;
 }
 
 input[type="number"] {
-    background: linear-gradient(45deg, #cac41dd1, #b76c1b);
-
-background-size: 500% 500%;
-    animation: gift-gradient 8s linear infinite;
+  background: linear-gradient(45deg, #faee47bc, #fd99ffbc);
+background-size: 200% 200%;
+    animation: gift-gradient 4s linear infinite;
   color: var(--tg-button-text-color, #fff);
   outline: none;
   margin: 0;
-  padding: 18px;
+  padding: 16.5px;
   border: none;
   border-radius: 6px;
   text-align: center;
   font-size: 18px;
-  color: #eee;
+  color: #fff;
+  text-shadow: #000 10px;
   -moz-appearance: textfield;
 }
 
@@ -185,3 +186,4 @@ button:active {
     background-position: 0% 50%;
   }
 }
+

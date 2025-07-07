@@ -5,7 +5,7 @@
   $: {
     if (record.type === 'giftReceived') avatar = '🎁💫';
     else if (record.type === 'giftSent') avatar = '🎁☁️';
-    else avatar = '💱⭐';
+    else avatar = '⭐';
   }
   function toggle() {
     open = !open;
@@ -21,7 +21,7 @@
   {#if open}
     <div class="details">
       {#if record.fiat}
-        <p>${record.fiat.toFixed(2)}</p>
+        <p>{record.fiat.toFixed(2)}₽</p>
       {/if}
       {#if record.toId}
         <p>Кому: {record.toId}</p>

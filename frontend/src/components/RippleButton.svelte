@@ -1,7 +1,7 @@
 <script>
   export let onClick = () => {};
   export let disabled = false;
-  export let kind = '';
+  export let kind = "";
   let ripples = [];
 
   function createRipple(event) {
@@ -12,13 +12,13 @@
     const ripple = { x, y, size, key: Date.now() };
     ripples = [...ripples, ripple];
     setTimeout(() => {
-      ripples = ripples.filter(r => r.key !== ripple.key);
+      ripples = ripples.filter((r) => r.key !== ripple.key);
     }, 600);
     onClick(event);
   }
 </script>
 
-<button class="ripple-btn {kind}" on:click={createRipple} disabled={disabled}>
+<button class="ripple-btn {kind}" on:click={createRipple} {disabled}>
   <slot></slot>
   <span class="ripple-box">
     {#each ripples as r (r.key)}
@@ -34,7 +34,7 @@
   .ripple-btn {
     position: relative;
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 16px;
@@ -54,13 +54,15 @@
       linear-gradient(to right, #28364a, #162033);
   }
   .ripple-btn.buy {
-    background: linear-gradient(45deg, #00ffee88, #32046388);
-    background-size: 500% 500%;
+    width: 300px;
+    background: linear-gradient(45deg, #00ffee88, #32046388, #eeaaffbb);
+    background-size: 200% 200%;
     margin-top: 12px;
     animation: gift-gradient 8s linear infinite;
   }
   .ripple-btn.gift {
-    background: linear-gradient(30deg, #e0990bcc, #c53a2dee);
+    width: 300px;
+    background: linear-gradient(30deg, #e0990bcc, #c53a2dee, #ec7c32bb);
     background-size: 200% 200%;
     margin-top: 12px;
     animation: gift-gradient 4s linear infinite;

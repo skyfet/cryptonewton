@@ -4,7 +4,7 @@
   import { navigate } from "../router.js";
   import RippleButton from "../components/RippleButton.svelte";
   import { ArrowLeft } from "@lucide/svelte";
-  const PRICE_USD = 0.05;
+  const PRICE_RUB = 2;
   let amount = 0;
   let loading = false;
 
@@ -16,7 +16,7 @@
     const tx = {
       type: "purchase",
       amount,
-      fiat: amount * PRICE_USD,
+      fiat: amount * PRICE_RUB,
       time: Date.now(),
     };
     const history = JSON.parse(localStorage.getItem("history") || "[]");
@@ -26,19 +26,32 @@
     loading = false;
     navigate("/success");
   }
+
+  function onPickAmount(val) {
+    if (val > 10000) {
+      return;
+    }
+    if (val < 1) {
+      return;
+    }
+    amount = val;
+  }
 </script>
 
 <div class="container">
-  <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
-  <h2>Сколько желаете?</h2>
-  <AmountPicker onSelect={(val) => (amount = val)} />
-
+  <div style="color: #222;">
+    <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
+    <h2 style="display: inline-block;">Пополнение Звёзд</h2>
+  </div>
+  <AmountPicker onSelect={onPickAmount} />
   <RippleButton
     kind="buy"
     onClick={confirm}
     disabled={loading}
-    style="margin-top: 8px;">Купить</RippleButton
+    style="margin-top: 8px;"
   >
+    Купить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
+  </RippleButton>
 </div>
 
 {#if loading}
