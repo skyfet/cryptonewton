@@ -12,13 +12,11 @@
 <div class="container">
   <div style="margin-top: 0px; margin-bottom: 70px;">
     {#if purchase}
-      <h2 style="color: #ffa; font-weight: bold; font-size: 47px;">
-        Успешно куплено!
-      </h2>
+      <h2 class="success">Успешно куплено!</h2>
       <div>
-        <h2 style="font-size: 88px; display: block; position: relative;">
+        <h2 class="success amounts">
           {purchase.amount}
-          <lottie-player id="stars" src="./1751906734332.json" autoplay loop>
+          <lottie-player id="stars-bg" src="./1751909616946.json" autoplay loop>
           </lottie-player>
         </h2>
       </div>
@@ -39,15 +37,24 @@
 </div>
 
 <style>
-  #stars {
+  #stars-bg {
     position: absolute;
-    top: 8px;
-    right: -150px;
-    height: 200px;
-    bottom: 0;
+    top: 0;
+    right: 0;
     z-index: -1;
-    /* height: 150px; */
   }
+  .amounts {
+    font-size: 88px;
+    display: block;
+    position: relative;
+  }
+  .success {
+    color: #ffa;
+    font-weight: bold;
+    font-size: 47px;
+    text-shadow: #fa5 0px 0 10px, #5af 2px 0 20px;
+  }
+
   @keyframes spin {
     0% {
       transform: scale(0) rotate(0deg);
