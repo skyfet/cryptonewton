@@ -13,7 +13,7 @@
   <div style="margin-top: 50px; margin-bottom: 150px;">
     {#if purchase}
       <h2 style="color: #ffa; font-weight: bold; font-size: 47px;">
-        Успешно купили!
+        Успешно куплено!
       </h2>
       <h2 style="font-size: 88px; display: block; position: relative;">
         {purchase.amount}

@@ -1,10 +1,5 @@
-<script>
-  export let message = 'Загрузка...'
-</script>
-
 <div class="overlay">
   <div class="spinner"></div>
-  <p>{message}</p>
 </div>
 
 <style>
