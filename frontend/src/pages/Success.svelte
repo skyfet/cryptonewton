@@ -41,8 +41,8 @@
 <style>
   #stars {
     position: absolute;
-    top: 0%;
-    right: -180px;
+    top: 8px;
+    right: -150px;
     height: 200px;
     bottom: 0;
     z-index: -1;
