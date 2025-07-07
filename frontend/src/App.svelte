@@ -31,7 +31,9 @@
   <lottie-player id="cosmo" src="./1751881123755.json" autoplay loop>
   </lottie-player>
 </div>
-<svelte:component this={Component} />
+<div style="padding: 24px;">
+  <svelte:component this={Component} />
+</div>
 
 <style>
   #cosmo {

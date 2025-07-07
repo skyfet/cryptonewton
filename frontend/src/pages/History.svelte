@@ -10,12 +10,10 @@
 </script>
 
 {#if records.length}
-  <div class="container">
-    <h2 class="fancy-text">История</h2>
-    <div>
-      {#each records as r}
-        <HistoryCard record={r} />
-      {/each}
-    </div>
+  <h2 class="fancy-text">История</h2>
+  <div>
+    {#each records as r}
+      <HistoryCard record={r} />
+    {/each}
   </div>
 {/if}
