@@ -44,12 +44,11 @@
     z-index: -1;
   }
   .success {
-    color: #ffa;
+    color: #ff5;
     font-weight: bold;
     font-size: 32px;
     text-shadow:
-      #fa5 0px 0 10px,
-      #5af 2px 0 20px;
+      /* #fa5 0px 0 10px, */ rgba(104, 129, 155, 155) 2px 0 20px;
   }
   .amounts {
     font-size: 88px;
