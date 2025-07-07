@@ -6,12 +6,7 @@
 </script>
 
 <div class="cosmo-bg">
-  <lottie-player
-    id="cosmo"
-    src="./1751881123755.json"
-    autoplay
-    loop
-  >
+  <lottie-player id="cosmo" src="./1751881123755.json" autoplay loop>
   </lottie-player>
 </div>
 <h2 class="cosmo-header">Star ⭐ Pay Terminal</h2>
@@ -28,6 +23,11 @@
 </div>
 
 <style>
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
   .button-group {
     display: flex;
     justify-content: center;
@@ -35,22 +35,27 @@
     width: 100%;
   }
   #cosmo {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    min-width: 200vh;
+    /* min-width: 100vw; */
+    min-height: 100vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* важно для кликов */
+    animation: gift-gradient 24s ease-in-out infinite;
   }
 
   .cosmo-bg {
-    position: absolute;
-    inset: 0;
+    position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     z-index: -1;
   }
+
   .cosmo-header {
     margin-top: 46px;
     margin-bottom: 64px;
@@ -58,14 +63,25 @@
 
   @media screen and (min-width: 444px) and (max-width: 749px) {
     .cosmo-header {
-      margin-top: 120px;
-      margin-bottom: 180px;
+      margin-top: 80px;
+      margin-bottom: 120px;
     }
   }
   @media screen and (min-width: 750px) {
     .cosmo-header {
       margin-top: 0px;
       margin-bottom: 20px;
+    }
+  }
+  @keyframes gift-gradient {
+    0% {
+      left: 100%;
+    }
+    50% {
+      left: 1%;
+    }
+    100% {
+      left: 100%;
     }
   }
 </style>
