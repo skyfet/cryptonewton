@@ -36,8 +36,8 @@
 
 <style>
   .card {
-    background: #163024;
-    color: #ecfdf5;
+    background: #26224b;
+    color: #fff;
     border: 1px solid #265e2f;
     border-radius: 8px;
     padding: 12px;

@@ -59,7 +59,7 @@ body {
 }
 
 .amount.selected {
-  background: linear-gradient(45deg, #faee47bc, #fd99ffbc);
+  background: linear-gradient(45deg, #8b2abba4, #72a1f2dc);
 background-size: 200% 200%;
     animation: gift-gradient 4s linear infinite;
   color: var(--tg-button-text-color, #fff);
@@ -78,7 +78,7 @@ background-size: 200% 200%;
 }
 
 input[type="number"] {
-  background: linear-gradient(45deg, #faee47bc, #fd99ffbc);
+  background: linear-gradient(45deg, #8b2abba4, #72a1f2dc);
 background-size: 200% 200%;
     animation: gift-gradient 4s linear infinite;
   color: var(--tg-button-text-color, #fff);
@@ -164,7 +164,7 @@ button:active {
 }
 
 .fancy-text {
-  background: #eee;
+  background: #fff;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

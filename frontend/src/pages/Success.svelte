@@ -22,6 +22,7 @@
 
 <style>
 .star {
+  color: #222;
   font-size: 64px;
   animation: spin 1.5s ease;
   margin: 20px auto;
