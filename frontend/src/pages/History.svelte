@@ -10,7 +10,7 @@
 </script>
 
 {#if records.length}
-  <h2 class="fancy-text">История</h2>
+  <h2 class="fancy-text">История</h2> 
   <div>
     {#each records as r}
       <HistoryCard record={r} />

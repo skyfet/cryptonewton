@@ -9,7 +9,7 @@
   }
 </script>
 
-<div class="card" on:click={toggle}>
+<div class="card">
   <p class="avatar">
     {avatar}
     {#if record.fiat}
