@@ -11,9 +11,9 @@
 
 <div class="card">
   <p>
-    <span style="flex: 1;">{avatar}</span>
+    <span style="flex: 2;">{avatar}</span>
     {#if record.fiat}
-      <span style="flex: 1;">{record.fiat.toFixed(2)}₽</span>
+      <span style="flex: 2;">{record.fiat.toFixed(2)}₽</span>
     {/if}
     <!-- {#if record.type === "giftSent"}
       <span>отправлено {record.toId}</span>
@@ -22,8 +22,8 @@
       <span>получено от {record.fromId}</span>
     {/if} -->
   </p>
-  <p class="avatar" style="flex: 1; text-align: right;">{record.amount} ⭐</p>
-  <p style="flex: 0; text-align: right;">
+  <p class="avatar" style="flex: 2; text-align: right;">{record.amount} ⭐</p>
+  <p style="flex: 1; text-align: right;">
     {new Date(record.time).toLocaleString().replace(", ", "\n")}
   </p>
 </div>

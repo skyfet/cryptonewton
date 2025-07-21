@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-body {
-  font-family: "Tektur", sans-serif;
-  font-optical-sizing: auto;
-}
+
 
 body {
   margin: 0;
@@ -69,7 +66,6 @@ body {
 }
 
 .amount.selected {
-  padding-right: 8px;
   background: linear-gradient(45deg, #8b2abba4, #72a1f2dc);
   background-size: 200% 200%;
   animation: gift-gradient 4s linear infinite;
@@ -133,7 +129,7 @@ button {
   font-family: "Tektur", sans-serif;
   font-optical-sizing: auto;
   text-transform: uppercase;
-  background-color: #1f192bbb;
+  background-color: #1f192b55;
 
   border: none;
   font-size: 1.2rem;
@@ -175,7 +171,7 @@ button:active {
   }
 
   50% {
-    filter: brightness(2);
+    filter: brightness(1.2);
     transform: scale(1.2);
   }
 }
