@@ -172,7 +172,7 @@
       app.innerHTML = `<p>🎉 ${text}</p><button id="restart" class="btn">На главную</button>`;
       tg.MainButton.hide();
       tg.BackButton.hide();
-      document.getElementById('restart').onclick = () => { window.location.search = '/'; };
+      document.getElementById('restart').onclick = () => { var baseurl = window.location.origin + window.location.pathname; window.location.href = baseurl; };
     }
 
     if (mode === 'gift' && toId) {

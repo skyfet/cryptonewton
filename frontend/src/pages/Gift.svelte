@@ -33,6 +33,8 @@
     const history = JSON.parse(localStorage.getItem("history") || "[]");
     history.push(tx);
     localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem("lastPurchase", JSON.stringify(tx));
+
     navigate("/success");
     // } else {
     // alert(res.error);
