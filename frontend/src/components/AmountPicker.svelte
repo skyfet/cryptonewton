@@ -54,13 +54,14 @@
                 ? parseInt(custom)
                 : parseInt(custom) >= 0
                   ? 10000
-                  : 0
+                  : 0,
             )}
-          min="1"
+          min="5"
           max="10000"
-          
         />
-        <span class="star {selected === 'custom' ? 'sparkle' : ''}">⭐</span>
+        <span class="star {selected === 'custom' ? 'sparkle' : ''}"
+          >{selected === "custom" && custom ? "🌟" : "⭐"}</span
+        >
       </div>
     {/if}
   </div>

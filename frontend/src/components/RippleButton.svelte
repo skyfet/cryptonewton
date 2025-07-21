@@ -39,20 +39,10 @@
     justify-content: center;
     margin-top: 12px;
     padding: 16px;
-    background:
-      radial-gradient(#ffffff22 1px, transparent 1px) 0 0/3px 3px,
-      radial-gradient(#ffffff22 1px, transparent 1px) 1.5px 1.5px/3px 3px,
-      linear-gradient(to right, #1e293b, #0f172a);
     color: var(--tg-button-text-color, #fff);
     border-radius: 8px;
     font-weight: 600;
     transition: background 0.3s;
-  }
-  .ripple-btn:hover {
-    background:
-      radial-gradient(#ffffff22 1px, transparent 1px) 0 0/3px 3px,
-      radial-gradient(#ffffff22 1px, transparent 1px) 1.5px 1.5px/3px 3px,
-      linear-gradient(to right, #28364a, #162033);
   }
   .ripple-btn.buy {
     min-width: 300px;
@@ -62,7 +52,7 @@
   }
   .ripple-btn.gift {
     min-width: 300px;
-    background: linear-gradient(30deg, #e0990bcc, #c53a2dee, #ec7c32bb);
+    background: linear-gradient(30deg, #fcac0daa, #f14536aa, #ec7c32bb);
     background-size: 200% 200%;
     animation: gift-gradient 4s linear infinite;
   }
