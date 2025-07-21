@@ -1,20 +1,27 @@
 module.exports = function menuHandler(bot, msg) {
-  bot.sendMessage(msg.chat.id, 'Привет! Что хочешь сделать?', {
+  const name = msg.from.first_name || 'друг';
+
+  bot.sendMessage(msg.chat.id, `👋 Привет, ${name}!\n\n✨ Я помогу тебе купить или подарить звёзды в Telegram. Что хочешь сделать? Выбери в меню снизу ⬇️`, {
     reply_markup: {
-      inline_keyboard: [
+      keyboard: [
         [
           {
-            text: '🌟 Купить',
+            text: '🌟 Купить звёзды',
             web_app: { url: 'https://skyfet.github.io/cryptonewton/#/buy' }
           }
         ],
         [
           {
             text: '🎁 Подарить другу',
-            web_app: { url: 'https://skyfet.github.io/cryptonewton/?mode=gift' }
+            request_user: {
+              request_id: 1,
+              user_is_bot: false
+            }
           }
         ]
-      ]
+      ],
+      resize_keyboard: true,
+      one_time_keyboard: true
     }
   });
 };
