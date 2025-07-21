@@ -2,4 +2,4 @@
   export let username = '';
 </script>
 
-<h2>Получатель: <b>{username}</b></h2>
+<h2><b>{username}</b></h2>
