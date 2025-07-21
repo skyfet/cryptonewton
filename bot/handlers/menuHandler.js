@@ -4,13 +4,13 @@ module.exports = function menuHandler(bot, msg) {
       inline_keyboard: [
         [
           {
-            text: '🌟 Купить звёзды',
+            text: '🌟 Купить',
             web_app: { url: 'https://skyfet.github.io/cryptonewton/#/buy' }
           }
         ],
         [
           {
-            text: '🎁 Подарить звёзды другу',
+            text: '🎁 Подарить другу',
             web_app: { url: 'https://skyfet.github.io/cryptonewton/?mode=gift' }
           }
         ]

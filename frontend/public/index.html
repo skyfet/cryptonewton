@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
       background: var(--tg-bg-color, #f6f6f6);
       color: var(--tg-text-color, #222);
     }
+
     .btn {
       display: block;
       width: 100%;
@@ -25,18 +27,29 @@
       border: none;
       border-radius: 6px;
     }
-    .amounts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+    .amounts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
     .amount {
+      font-family: "Tektur", sans-serif;
+      font-optical-sizing: auto;
       padding: 10px 15px;
       background: var(--tg-secondary-bg-color, #fff);
       border: 1px solid var(--tg-hint-color, #ccc);
       border-radius: 4px;
       cursor: pointer;
     }
+
     .amount.selected {
       background: var(--tg-button-color, #0077ff);
       color: var(--tg-button-text-color, #fff);
     }
+
     #inputAmount {
       width: 100%;
       padding: 10px;
@@ -49,6 +62,7 @@
     }
   </style>
 </head>
+
 <body>
   <div id="app" class="container"></div>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -72,7 +86,7 @@
     tg.onEvent('themeChanged', applyTheme);
     const app = document.getElementById('app');
 
-    const amounts = [50,150,250,500,1000,2500];
+    const amounts = [50, 150, 250, 500, 1000, 2500];
     let selectedAmount = null;
     const params = new URLSearchParams(window.location.search);
     const mode = params.get('mode') || 'buy';
@@ -89,7 +103,7 @@
       tg.MainButton.hide();
       tg.BackButton.show();
       tg.offEvent('backButtonClicked');
-      tg.onEvent('backButtonClicked', () => { window.location.search=''; });
+      tg.onEvent('backButtonClicked', () => { window.location.search = ''; });
       const recipientInfo = mode === 'gift' ? `<p>Получатель: <b>${toId}</b></p>` : '';
       app.innerHTML = `
         ${recipientInfo}
@@ -104,12 +118,12 @@
         el.addEventListener('click', () => {
           document.querySelectorAll('.amount').forEach(a => a.classList.remove('selected'));
           el.classList.add('selected');
-          if(el.id === 'enter') {
-            document.getElementById('inputAmount').style.display='block';
+          if (el.id === 'enter') {
+            document.getElementById('inputAmount').style.display = 'block';
             selectedAmount = null;
           } else {
-            document.getElementById('inputAmount').style.display='none';
-            selectedAmount = parseInt(el.dataset.val,10);
+            document.getElementById('inputAmount').style.display = 'none';
+            selectedAmount = parseInt(el.dataset.val, 10);
           }
         });
       });
@@ -117,11 +131,11 @@
     }
 
     function confirmAmount() {
-      if(document.getElementById('inputAmount').style.display==='block') {
-        selectedAmount = parseInt(document.getElementById('inputAmount').value,10);
+      if (document.getElementById('inputAmount').style.display === 'block') {
+        selectedAmount = parseInt(document.getElementById('inputAmount').value, 10);
       }
-      if(!selectedAmount || selectedAmount < 1) return alert('Укажите сумму');
-      const text = mode==='gift' ? `Подарить ${selectedAmount} ⭐` : `Купить ${selectedAmount} ⭐`;
+      if (!selectedAmount || selectedAmount < 1) return alert('Укажите сумму');
+      const text = mode === 'gift' ? `Подарить ${selectedAmount} ⭐` : `Купить ${selectedAmount} ⭐`;
       app.innerHTML = `<p>${text}</p>`;
       tg.MainButton.setText('Подтвердить');
       tg.MainButton.show();
@@ -130,42 +144,43 @@
     }
 
     function submit() {
-      const url = mode==='gift' ? '/gift' : '/purchase';
-      const payload = mode==='gift' ? {
+      const url = mode === 'gift' ? '/gift' : '/purchase';
+      const payload = mode === 'gift' ? {
         from_id: tg.initDataUnsafe?.user?.id,
-        to_id: parseInt(toId,10),
+        to_id: parseInt(toId, 10),
         amount: selectedAmount
       } : {
         user_id: tg.initDataUnsafe?.user?.id,
         amount: selectedAmount
       };
       tg.MainButton.showProgress();
-      fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-        .then(r=>r.json())
-        .then(d=>{
-          if(d.ok){
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(r => r.json())
+        .then(d => {
+          if (d.ok) {
             renderSuccess();
           } else {
             alert(d.error || 'Ошибка');
           }
         })
-        .catch(()=>alert('Сетевой сбой'))
-        .finally(()=>tg.MainButton.hideProgress());
+        .catch(() => alert('Сетевой сбой'))
+        .finally(() => tg.MainButton.hideProgress());
     }
 
     function renderSuccess() {
-      const text = mode==='gift' ? `Подарок отправлен ${toId}` : 'Звёзды успешно куплены';
+      const text = mode === 'gift' ? `Подарок отправлен ${toId}` : 'Звёзды успешно куплены';
       app.innerHTML = `<p>🎉 ${text}</p><button id="restart" class="btn">На главную</button>`;
       tg.MainButton.hide();
       tg.BackButton.hide();
-      document.getElementById('restart').onclick=()=>{window.location.search='';};
+      document.getElementById('restart').onclick = () => { window.location.search = '/'; };
     }
 
-    if(mode==='gift' && toId){
+    if (mode === 'gift' && toId) {
       renderAmount();
     } else {
       renderStart();
     }
   </script>
 </body>
+
 </html>
