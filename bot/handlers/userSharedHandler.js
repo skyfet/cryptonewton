@@ -18,7 +18,7 @@ module.exports = function userSharedHandler(bot, msg) {
         reply_markup: {
           inline_keyboard: [[{
             text: '🎁 Отправить подарок',
-            web_app: { url: `https://skyfet.github.io/cryptonewton/#/gift?user_id=${user_id}&username=#${user_id}` }
+            web_app: { url: `https://skyfet.github.io/cryptonewton/#/gift?user_id=${user_id}` }
           }]]
         }
       });

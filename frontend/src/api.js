@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || ''
+const API_BASE = import.meta.env.VITE_API_BASE || 'localhost:3000'
 
 export async function purchase(user_id, amount) {
   const res = await fetch(`${API_BASE}/purchase`, {
