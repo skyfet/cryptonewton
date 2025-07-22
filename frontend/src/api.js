@@ -1,5 +1,7 @@
+const API_BASE = import.meta.env.VITE_API_BASE || ''
+
 export async function purchase(user_id, amount) {
-  const res = await fetch('/purchase', {
+  const res = await fetch(`${API_BASE}/purchase`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user_id, amount })
@@ -8,7 +10,7 @@ export async function purchase(user_id, amount) {
 }
 
 export async function gift(from_id, to_id, amount) {
-  const res = await fetch('/gift', {
+  const res = await fetch(`${API_BASE}/gift`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ from_id, to_id, amount })
@@ -17,13 +19,17 @@ export async function gift(from_id, to_id, amount) {
 }
 
 export async function getHistory(user_id) {
-  const res = await fetch(`/history?user_id=${user_id}`);
+  const res = await fetch(`${API_BASE}/history?user_id=${user_id}`)
   return res.json();
 }
 
+export async function getProfile(username) {
+  const url = `${API_BASE}/get-profile?username=${encodeURIComponent(username)}`
+  const res = await fetch(url)
+  if (!res.ok) return null
+  return res.json()
+}
+
 export async function searchUser(query) {
-  const res = await fetch(`t.me/${encodeURIComponent(query)}`);
-  if (!res.ok) return null;
-  const data = await res.json();
-  return data.ok ? data.result : null;
+  return getProfile(query)
 }

@@ -2,6 +2,7 @@
   import AmountPicker from "../components/AmountPicker.svelte";
   import UsernameDisplay from "../components/UsernameDisplay.svelte";
   import LoadingOverlay from "../components/LoadingOverlay.svelte";
+  import UserSearch from "../components/UserSearch.svelte";
 
   import { navigate } from "../router.js";
   // import { gift } from "../api.js";
@@ -48,7 +49,7 @@
     <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
     <h2 style="display: inline;">Подарок Другу</h2>
   </div>
-  <!-- <UserSearch /> -->
+  <UserSearch />
   {#if toId}
     <UsernameDisplay username={username || toId} />
   {/if}
