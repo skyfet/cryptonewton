@@ -15,14 +15,15 @@
   "type": "commonjs",
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "express": "^4.19.2",
+    "node-html-parser": "^7.0.1",
     "node-telegram-bot-api": "^0.66.0",
-    "tailwindcss": "^4.1.11",
-    "express": "^4.19.2"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "jest": "^30.0.3",
-    "supertest": "^7.1.1",
-    "nock": "^13.4.0"
+    "nock": "^13.4.0",
+    "supertest": "^7.1.1"
   },
   "jest": {
     "testEnvironment": "node"

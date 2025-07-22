@@ -1,16 +1,33 @@
 const express = require('express');
-const searchUser = require('./searchUser');
+const parseTelegramProfile = require('./parseTelegramProfile');
 
 const app = express();
 
-app.get('/search', async (req, res) => {
-  const { q } = req.query;
-  const result = await searchUser(q);
-  if (result) {
-    res.json({ ok: true, result });
-  } else {
-    res.status(404).json({ ok: false });
+app.get('/get-profile', async (req, res) => {
+  const username = req.query.username;
+  if (!username) {
+    return res.status(400).json({ error: 'Missing username' });
+  }
+
+  const url = `https://t.me/${username}`;
+
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+
+    const data = parseTelegramProfile(html);
+
+    return res.json({
+      status: 'ok',
+      username,
+      ...data,
+    });
+
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
   }
 });
+
+
 
 module.exports = app;
