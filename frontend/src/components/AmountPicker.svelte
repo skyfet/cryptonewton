@@ -59,7 +59,7 @@
           min="5"
           max="10000"
         />
-        <span class="star {selected === 'custom' ? 'sparkle' : ''}"
+        <span style="padding-right: 8px;" class="star {selected === 'custom' ? 'sparkle' : ''}"
           >{selected === "custom" && custom ? "🌟" : "⭐"}</span
         >
       </div>

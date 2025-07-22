@@ -27,7 +27,7 @@
 
   .cosmo-header {
     font-family: "Bitcount Prop Single", system-ui;
-    font-size: 2rem;
+    font-size: 2.42rem;
     margin-top: 20px;
     margin-bottom: 20px;
   }

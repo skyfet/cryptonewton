@@ -12,9 +12,9 @@
 <div class="container">
   <div style="margin-top: 0px; margin-bottom: 50px;">
     {#if purchase}
-      <h2 class="success">Успешно куплено!</h2>
+      <h2 class="success">💫 Пополнено!</h2>
       <div>
-        <h2 class="success amounts">
+        <h2 class="sparkle success amounts">
           {purchase.amount}
           <lottie-player id="stars-bg" src="./1751909760808.json" autoplay loop>
           </lottie-player>
