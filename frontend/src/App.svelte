@@ -29,7 +29,7 @@
 
 <header class="header">
   <div
-    style="display: flex; justify-content: space-evenly; padding: 24px; width: 100%; font-size: 12px; color: #eee8;"
+    style="display: flex; justify-content: space-evenly; text-align: center; padding: 24px; width: 100%; font-size: 8px; color: #eee8;"
   >
     <a target="policy" href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-PO-RABOTE-S-PERSONALNYMI-DANNYMI-POLZOVATELEJ-03-30">Политика конфиденциальности</a>
     <a target="agreement" href="https://telegra.ph/Polzovatelskoe-soglashenie-Publichnaya-oferta-08-05">Пользовательское соглашение</a>
