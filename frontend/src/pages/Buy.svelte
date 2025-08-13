@@ -38,7 +38,7 @@
   }
 </script>
 
-<div class="container">
+<div>
   <div style="color: #fff;">
     <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
     <h2 style="display: inline-block;">Пополнение Звёзд</h2>

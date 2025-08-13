@@ -2,7 +2,7 @@
   import AmountPicker from "../components/AmountPicker.svelte";
   import UsernameDisplay from "../components/UsernameDisplay.svelte";
   import LoadingOverlay from "../components/LoadingOverlay.svelte";
-  // import UserSearch from "../components/UserSearch.svelte";
+  import UserSearch from "../components/UserSearch.svelte";
 
   import { navigate } from "../router.js";
   // import { gift } from "../api.js";
@@ -17,7 +17,7 @@
   let loading = false;
 
   async function confirm() {
-    const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
+    // const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
     loading = true;
 
     // if (!fromId || !toId || amount < 1) return;
@@ -28,6 +28,7 @@
     const tx = {
       type: "giftSent",
       toId: parseInt(toId, 10),
+      toUsername: document.querySelector("input[name=username]").value,
       amount,
       time: Date.now(),
     };
@@ -49,7 +50,7 @@
     <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
     <h2 style="display: inline;">Подарок Другу</h2>
   </div>
-  <!-- <UserSearch /> -->
+  <input style="border: 2px solid; background: #222; padding: 8px; margin: 24px 0 12px 0;" placeholder="Username" autocomplete="off" name="username" type="text" />
   {#if toId}
     <UsernameDisplay username={username || `#${toId}`} />
   {/if}

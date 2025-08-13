@@ -27,11 +27,19 @@
   $: Component = pages[current] || Welcome;
 </script>
 
+<header class="header">
+  <div
+    style="display: flex; justify-content: space-evenly; padding: 24px; width: 100%; font-size: 12px; color: #eee8;"
+  >
+    <a target="policy" href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-PO-RABOTE-S-PERSONALNYMI-DANNYMI-POLZOVATELEJ-03-30">Политика конфиденциальности</a>
+    <a target="agreement" href="https://telegra.ph/Polzovatelskoe-soglashenie-Publichnaya-oferta-08-05">Пользовательское соглашение</a>
+  </div>
+</header>
 <div class="cosmo-bg">
   <lottie-player id="cosmo" src="./1751881123755.json" autoplay loop>
   </lottie-player>
 </div>
-<div style="padding: 24px;">
+<div style="padding: 24px; display: flex; justify-content: center; flex-direction: column">
   <svelte:component this={Component} />
 </div>
 

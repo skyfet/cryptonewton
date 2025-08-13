@@ -10,7 +10,7 @@
 </script>
 
 <div class="container">
-  <div style="margin-top: 0px; margin-bottom: 50px;">
+  <div style="padding: 42px;  overflow: hidden;">
     {#if purchase}
       <h2 class="success">💫 Пополнено!</h2>
       <div>
