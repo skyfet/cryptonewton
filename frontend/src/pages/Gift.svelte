@@ -29,10 +29,12 @@
     }
 
     // Validate amount
-    if (!amount || amount < 1 ||  typeof amount !== "number" || isNaN(amount)) {
-      errors.amount = "Выберите сумму подарка";
+    if (!amount || amount < 1) {
+      errors.amount = "Минимальная сумма подарка: 1 звезда";
     } else if (amount > 1000) {
-      errors.amount = "Максимальная сумма подарка 1000";
+      errors.amount = "Максимальная сумма подарка: 1000 звёзд";
+    } else if (isNaN(amount)) {
+      errors.amount = "Введите число";
     }
 
     return Object.keys(errors).length === 0;

@@ -11,14 +11,14 @@
   let success = "";
 
   function validateAmount(val) {
-    if (!val || val < 1 || typeof val !== "number" || isNaN(val)) {
+    if (!val || val < 1) {
       return "Минимальная сумма покупки: 1 звезда";
     }
     if (val > 10000) {
       return "Максимальная сумма покупки: 10,000 звезд";
     }
-    if (!Number.isInteger(val)) {
-      return "Количество звезд должно быть целым числом";
+    if (isNan(val)) {
+      return "Введите число";
     }
     return null;
   }
