@@ -18,6 +18,21 @@
   }
 
   $: if (amountInput) focusAmountInput();
+
+  function handleCustomInput() {
+    const value = parseInt(custom);
+    if (!isNaN(value)) {
+      if (value < 5) {
+        onSelect(5);
+      } else if (value > 10000) {
+        onSelect(10000);
+      } else {
+        onSelect(value);
+      }
+    } else {
+      onSelect(0);
+    }
+  }
 </script>
 
 <div class="amounts">
@@ -35,12 +50,13 @@
 </div>
 <br />
 {#if selected != "custom"}
-  <button
-    class="amount {selected === 'custom' ? 'selected' : ''}"
-    on:click={() => choose("custom")}
-  >
-    Своё
-  </button>
+<button
+class="amount {selected === 'custom' ? 'selected' : ''}"
+on:click={() => choose("custom")}
+>
+Своя сумма
+</button>
+<br />
 {/if}
 <div style="position: relative;">
   {#if selected === "custom"}
@@ -50,14 +66,7 @@
       bind:this={amountInput}
       type="number"
       bind:value={custom}
-      on:input={() =>
-        onSelect(
-          parseInt(custom) || 0 <= 10000
-            ? parseInt(custom)
-            : parseInt(custom) >= 0
-              ? 10000
-              : 0
-        )}
+      on:input={handleCustomInput}
       min="5"
       max="10000"
     />

@@ -101,8 +101,6 @@ body {
 
 input[type="number"] {
   outline: none;
-  margin: 0;
-  margin-bottom: 2px;
   border: none;
   text-align: center;
   width: 100%;

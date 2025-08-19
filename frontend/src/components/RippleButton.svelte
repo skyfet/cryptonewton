@@ -32,13 +32,14 @@
 
 <style>
   .ripple-btn {
+    width: 64px;
+    height: 64px;
+    padding: 12px;
     position: relative;
     overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 12px;
-    padding: 16px;
     color: var(--tg-button-text-color, #fff);
     border-radius: 8px;
     font-weight: 600;

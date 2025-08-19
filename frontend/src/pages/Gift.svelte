@@ -5,28 +5,84 @@
   import UserSearch from "../components/UserSearch.svelte";
 
   import { navigate } from "../router.js";
-  // import { gift } from "../api.js";
+  import { gift, searchUser } from "../api.js";
   import RippleButton from "../components/RippleButton.svelte";
-  import { ArrowLeft } from "@lucide/svelte";
+  import { ArrowLeft, Search, X } from "@lucide/svelte";
   const PRICE_RUB = 1.42;
 
   let amount = 0;
   const params = new URLSearchParams(window.location.search);
-  let toId = params.get("user_id");
   let username = params.get("username") || "";
   let loading = false;
   let errors = {};
   let usernameInput = "";
+  let foundUser = null;
+  let isSearching = false;
+  let searchResults = [];
+  let showSearchResults = false;
+
+  // Если есть username в URL, попробуем найти пользователя
+  $: if (username && !foundUser) {
+    searchUserByUsername(username);
+  }
+
+  async function searchUserByUsername(username) {
+    if (!username.trim()) return;
+
+    isSearching = true;
+    try {
+      const user = await searchUser(username.trim());
+      if (user) {
+        foundUser = user;
+        usernameInput = user.username;
+        errors.username = null;
+        showSearchResults = false;
+      } else {
+        errors.username = "Пользователь не найден";
+        foundUser = null;
+      }
+    } catch (error) {
+      errors.username = "Ошибка поиска пользователя";
+      foundUser = null;
+    } finally {
+      isSearching = false;
+    }
+  }
+
+  async function handleUsernameSearch() {
+    if (!usernameInput.trim()) return;
+
+    isSearching = true;
+    showSearchResults = false;
+
+    try {
+      const user = await searchUser(usernameInput.trim());
+      if (user) {
+        foundUser = user;
+        usernameInput = user.username;
+        errors.username = null;
+        showSearchResults = false;
+      } else {
+        errors.username = "Пользователь не найден";
+        foundUser = null;
+      }
+    } catch (error) {
+      errors.username = "Ошибка поиска пользователя";
+      foundUser = null;
+    } finally {
+      isSearching = false;
+    }
+  }
+
+  function clearUser() {
+    foundUser = null;
+    usernameInput = "";
+    errors.username = null;
+    showSearchResults = false;
+  }
 
   function validateForm() {
     errors = {};
-
-    // Validate username
-    if (!usernameInput.trim()) {
-      errors.username = "Введите имя пользователя";
-    } else if (usernameInput.trim().length < 3) {
-      errors.username = "Имя пользователя должно содержать минимум 3 символа";
-    }
 
     // Validate amount
     if (!amount || amount < 1) {
@@ -37,6 +93,11 @@
       errors.amount = "Введите число";
     }
 
+    // Validate user found
+    if (!foundUser) {
+      errors.username = "Выберите пользователя для подарка";
+    }
+
     return Object.keys(errors).length === 0;
   }
 
@@ -45,32 +106,35 @@
       return;
     }
 
-    // const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
+    const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
     loading = true;
 
     try {
-      // if (!fromId || !toId || amount < 1) return;
-      await new Promise((r) => setTimeout(r, 2000));
+      if (!fromId || !foundUser || amount < 1) {
+        errors.general = "Ошибка авторизации или неверные данные";
+        return;
+      }
 
-      // gift(fromId, parseInt(toId, 10), amount).then((res) => {
-      // if (res.ok) {
-      const tx = {
-        type: "giftSent",
-        toId: parseInt(toId, 10),
-        toUsername: usernameInput.trim(),
-        amount,
-        time: Date.now(),
-      };
-      const history = JSON.parse(localStorage.getItem("history") || "[]");
-      history.push(tx);
-      localStorage.setItem("history", JSON.stringify(history));
-      localStorage.setItem("lastPurchase", JSON.stringify(tx));
+      const result = await gift(fromId, foundUser.id, amount);
 
-      navigate("/success");
-      // } else {
-      // alert(res.error);
-      // }
-      // });
+      if (result.ok) {
+        const tx = {
+          type: "giftSent",
+          toId: foundUser.id,
+          toUsername: foundUser.username,
+          toFullName: foundUser.name,
+          amount,
+          time: Date.now(),
+        };
+        const history = JSON.parse(localStorage.getItem("history") || "[]");
+        history.push(tx);
+        localStorage.setItem("history", JSON.stringify(history));
+        localStorage.setItem("lastPurchase", JSON.stringify(tx));
+
+        navigate("/success");
+      } else {
+        errors.general = "Ошибка при отправке подарка. Попробуйте еще раз.";
+      }
     } catch (error) {
       errors.general =
         "Произошла ошибка при отправке подарка. Попробуйте еще раз.";
@@ -85,26 +149,88 @@
   <h2 style="display: inline;">Подарок Другу</h2>
 </div>
 
-<div style="margin-bottom: 16px;">
-  <input
-    placeholder="Username"
-    autocomplete="off"
-    name="username"
-    type="text"
-    bind:value={usernameInput}
-    class:error={errors.username}
-    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;"
-  />
+<br />
+
+<div style="position: relative;">
+  {#if foundUser}
+    <!-- Отображение выбранного пользователя -->
+    <div
+      style="
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        padding: 12px; 
+        border: 1px solid #ddd; 
+        border-radius: 8px; 
+        background: #f8f9fa;
+        margin-bottom: 8px;
+      "
+    >
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div
+          style="
+            width: 32px; 
+            height: 32px; 
+            background: #007bff; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+          "
+        >
+          {foundUser.name
+            ? foundUser.name.charAt(0).toUpperCase()
+            : foundUser.username.charAt(0).toUpperCase()}
+        </div>
+        <div>
+          <div style="font-weight: 500; color: #333;">
+            {foundUser.name || "Пользователь"}
+          </div>
+          <div style="font-size: 14px; color: #666;">
+            @{foundUser.username}
+          </div>
+        </div>
+      </div>
+      <RippleButton onClick={clearUser} style="padding: 4px; min-width: auto;">
+        <X size={16} />
+      </RippleButton>
+    </div>
+  {:else}
+    <!-- Поиск пользователя -->
+    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+      <input
+        placeholder="Введите username пользователя"
+        autocomplete="off"
+        name="username"
+        type="text"
+        bind:value={usernameInput}
+        class:error={errors.username}
+        style="flex: 1; border: 1px solid #ddd; margin: 0; border-radius: 8px; font-size: 16px;"
+      />
+      <RippleButton
+        onClick={handleUsernameSearch}
+        disabled={!usernameInput.trim() || isSearching}
+        style="padding: 8px 24px;"
+      >
+        {#if isSearching}
+          <div
+            style="width: 16px; height: 16px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"
+          ></div>
+        {:else}
+          <Search size={16} />
+        {/if}
+      </RippleButton>
+    </div>
+  {/if}
+
   {#if errors.username}
     <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
       {errors.username}
     </div>
   {/if}
 </div>
-
-{#if toId}
-  <UsernameDisplay username={username || `#${toId}`} />
-{/if}
 
 <AmountPicker onSelect={(val) => (amount = val)} />
 {#if errors.amount}
@@ -122,7 +248,7 @@
 {/if}
 
 <RippleButton
-  disabled={loading}
+  disabled={loading || !foundUser || !amount || amount < 1}
   kind="buy"
   onClick={confirm}
   style="margin-top: 8px;"
@@ -137,5 +263,14 @@
 <style>
   .error {
     border-color: #e74c3c !important;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 </style>

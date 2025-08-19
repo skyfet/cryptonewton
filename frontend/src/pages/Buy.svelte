@@ -2,6 +2,7 @@
   import AmountPicker from "../components/AmountPicker.svelte";
   import LoadingOverlay from "../components/LoadingOverlay.svelte";
   import { navigate } from "../router.js";
+  import { purchase } from "../api.js";
   import RippleButton from "../components/RippleButton.svelte";
   import { ArrowLeft } from "@lucide/svelte";
   const PRICE_RUB = 1.42;
@@ -25,9 +26,9 @@
 
   function validateUser() {
     const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
-    // if (!userId) {
-      // return "Ошибка авторизации. Пожалуйста, перезапустите приложение.";
-    // }
+    if (!userId) {
+      return "Ошибка авторизации. Пожалуйста, перезапустите приложение.";
+    }
     return null;
   }
 
@@ -54,24 +55,29 @@
     loading = true;
     
     try {
-      await new Promise((r) => setTimeout(r, 2000));
-      const tx = {
-        type: "purchase",
-        amount,
-        fiat: amount * PRICE_RUB,
-        time: Date.now(),
-        userId,
-      };
-      const history = JSON.parse(localStorage.getItem("history") || "[]");
-      history.push(tx);
-      localStorage.setItem("history", JSON.stringify(history));
-      localStorage.setItem("lastPurchase", JSON.stringify(tx));
-      success = "Покупка успешно совершена!";
+      const result = await purchase(userId, amount);
       
-      // Переход на страницу успеха через небольшую задержку
-      setTimeout(() => {
-        navigate("/success");
-      }, 500);
+      if (result.ok) {
+        const tx = {
+          type: "purchase",
+          amount,
+          fiat: amount * PRICE_RUB,
+          time: Date.now(),
+          userId,
+        };
+        const history = JSON.parse(localStorage.getItem("history") || "[]");
+        history.push(tx);
+        localStorage.setItem("history", JSON.stringify(history));
+        localStorage.setItem("lastPurchase", JSON.stringify(tx));
+        success = "Покупка успешно совершена!";
+        
+        // Переход на страницу успеха через небольшую задержку
+        setTimeout(() => {
+          navigate("/success");
+        }, 500);
+      } else {
+        error = "Ошибка при совершении покупки. Попробуйте еще раз.";
+      }
     } catch (err) {
       error = "Произошла ошибка при совершении покупки. Попробуйте еще раз.";
       console.error("Purchase error:", err);
