@@ -12,7 +12,7 @@
     const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
     // if (!userId || amount < 1) return;
     loading = true;
-    await new Promise((r) => setTimeout(r, 2000));
+    await new Promise((r) => setTimeout(r, 5000));
     const tx = {
       type: "purchase",
       amount,
@@ -38,21 +38,19 @@
   }
 </script>
 
-<div>
-  <div style="color: #fff;">
-    <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
-    <h2 style="display: inline-block;">Пополнение Звёзд</h2>
-  </div>
-  <AmountPicker onSelect={onPickAmount} />
-  <RippleButton
-    kind="buy"
-    onClick={confirm}
-    disabled={loading}
-    style="margin-top: 8px;"
-  >
-    Купить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
-  </RippleButton>
+<div style="color: #fff;">
+  <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
+  <h2 style="display: inline-block;">Пополнение Звёзд</h2>
 </div>
+<AmountPicker onSelect={onPickAmount} />
+<RippleButton
+  kind="buy"
+  onClick={confirm}
+  disabled={loading}
+  style="margin-top: 8px;"
+>
+  Купить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
+</RippleButton>
 
 {#if loading}
   <LoadingOverlay />

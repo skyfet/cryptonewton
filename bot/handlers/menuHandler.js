@@ -18,6 +18,11 @@ module.exports = function menuHandler(bot, msg) {
               user_is_bot: false
             }
           }
+        ],
+        [
+          {
+            text: '🛟 Поддержка'
+          }
         ]
       ],
       resize_keyboard: true

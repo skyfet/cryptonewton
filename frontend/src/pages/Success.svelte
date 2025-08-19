@@ -12,7 +12,7 @@
 <div class="container">
   <div style="padding: 42px;  overflow: hidden;">
     {#if purchase}
-      <h2 class="success">💫 Пополнено!</h2>
+      <h2 class="success">💫 Ваши звёзды в пути!</h2>
       <div>
         <h2 class="sparkle success amounts">
           {purchase.amount}
@@ -29,9 +29,9 @@
     <RippleButton kind="buy" onClick={() => navigate("/buy")}
       >🌟 Купить ещё</RippleButton
     >
-    <!-- <RippleButton kind="gift" onClick={() => navigate("/gift")}
+    <RippleButton kind="gift" onClick={() => navigate("/gift")}
       >🎁 Подарить другу</RippleButton
-    > -->
+    >
     <RippleButton onClick={() => navigate("/")}>На главную</RippleButton>
   </div>
 </div>
@@ -48,22 +48,43 @@
     font-weight: bold;
     font-size: 32px;
     text-shadow:
-      /* #fa5 0px 0 10px, */ rgba(104, 129, 155, 155) 2px 0 20px;
+      #fa58 0px 0 10px,
+      #fa58 0px 0 20px,
+      #fa58 0px 0 30px,
+      rgba(104, 129, 155, 155) 2px 0 20px,
+      rgba(104, 129, 155, 155) 2px 0 40px;
+    animation: glow 2s ease-in-out infinite alternate;
   }
   .amounts {
     font-size: 88px;
     display: block;
     position: relative;
+    text-shadow:
+      #fa58 0px 0 15px,
+      #fa58 0px 0 30px,
+      #fa58 0px 0 45px,
+      #fa58 0px 0 60px,
+      rgba(104, 129, 155, 155) 2px 0 30px,
+      rgba(104, 129, 155, 155) 2px 0 60px;
+    animation: glow 2s ease-in-out infinite alternate;
   }
-  @keyframes spin {
-    0% {
-      transform: scale(0) rotate(0deg);
+  @keyframes glow {
+    from {
+      text-shadow:
+        #fa58 0px 0 10px,
+        #fa58 0px 0 20px,
+        #fa58 0px 0 30px,
+        rgba(104, 129, 155, 155) 2px 0 20px,
+        rgba(104, 129, 155, 155) 2px 0 40px;
     }
-    70% {
-      transform: scale(1.2) rotate(360deg);
-    }
-    100% {
-      transform: scale(1) rotate(360deg);
+    to {
+      text-shadow:
+        #fa58 0px 0 20px,
+        #fa58 0px 0 30px,
+        #fa58 0px 0 40px,
+        #fa58 0px 0 50px,
+        rgba(104, 129, 155, 155) 2px 0 30px,
+        rgba(104, 129, 155, 155) 2px 0 50px;
     }
   }
 </style>

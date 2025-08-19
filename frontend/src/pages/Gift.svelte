@@ -45,25 +45,23 @@
   }
 </script>
 
-<div class="container">
-  <div style="color: #222;">
-    <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
-    <h2 style="display: inline;">Подарок Другу</h2>
-  </div>
-  <input style="border: 2px solid; background: #222; padding: 8px; margin: 24px 0 12px 0;" placeholder="Username" autocomplete="off" name="username" type="text" />
-  {#if toId}
-    <UsernameDisplay username={username || `#${toId}`} />
-  {/if}
-  <AmountPicker onSelect={(val) => (amount = val)} />
-  <RippleButton
-    disabled={loading}
-    kind="buy"
-    onClick={confirm}
-    style="margin-top: 8px;"
-  >
-    Подарить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
-  </RippleButton>
+<div style="color: #222;">
+  <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
+  <h2 style="display: inline;">Подарок Другу</h2>
 </div>
+<input placeholder="Username" autocomplete="off" name="username" type="text" />
+{#if toId}
+  <UsernameDisplay username={username || `#${toId}`} />
+{/if}
+<AmountPicker onSelect={(val) => (amount = val)} />
+<RippleButton
+  disabled={loading}
+  kind="buy"
+  onClick={confirm}
+  style="margin-top: 8px;"
+>
+  Подарить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
+</RippleButton>
 
 {#if loading}
   <LoadingOverlay />

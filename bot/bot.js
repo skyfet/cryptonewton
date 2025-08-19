@@ -11,6 +11,13 @@ bot.on('message', msg => {
   if (msg.user_shared) userSharedHandler(bot, msg);
 });
 
+bot.on('message', msg => {
+  if (msg.text === '🛟 Поддержка') {
+    bot.sendMessage(msg.chat.id, 'Мы всегда на связи!\n\nЕсли у тебя возникли вопросы или нужна помощь, напиши лучшему админу @tipikls');
+    return;
+  }
+});
+
 if (require.main === module) {
   const port = process.env.PORT || 3000;
   app.listen(port, () => console.log(`Server running on ${port}`));
