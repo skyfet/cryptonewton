@@ -15,33 +15,66 @@
   let toId = params.get("user_id");
   let username = params.get("username") || "";
   let loading = false;
+  let errors = {};
+  let usernameInput = "";
+
+  function validateForm() {
+    errors = {};
+
+    // Validate username
+    if (!usernameInput.trim()) {
+      errors.username = "Введите имя пользователя";
+    } else if (usernameInput.trim().length < 3) {
+      errors.username = "Имя пользователя должно содержать минимум 3 символа";
+    }
+
+    // Validate amount
+    if (!amount || amount < 1) {
+      errors.amount = "Выберите сумму подарка";
+    } else if (amount > 1000) {
+      errors.amount = "Максимальная сумма подарка 1000";
+    }
+
+    return Object.keys(errors).length === 0;
+  }
 
   async function confirm() {
+    if (!validateForm()) {
+      return;
+    }
+
     // const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
     loading = true;
 
-    // if (!fromId || !toId || amount < 1) return;
-    await new Promise((r) => setTimeout(r, 2000));
+    try {
+      // if (!fromId || !toId || amount < 1) return;
+      await new Promise((r) => setTimeout(r, 2000));
 
-    // gift(fromId, parseInt(toId, 10), amount).then((res) => {
-    // if (res.ok) {
-    const tx = {
-      type: "giftSent",
-      toId: parseInt(toId, 10),
-      toUsername: document.querySelector("input[name=username]").value,
-      amount,
-      time: Date.now(),
-    };
-    const history = JSON.parse(localStorage.getItem("history") || "[]");
-    history.push(tx);
-    localStorage.setItem("history", JSON.stringify(history));
-    localStorage.setItem("lastPurchase", JSON.stringify(tx));
+      // gift(fromId, parseInt(toId, 10), amount).then((res) => {
+      // if (res.ok) {
+      const tx = {
+        type: "giftSent",
+        toId: parseInt(toId, 10),
+        toUsername: usernameInput.trim(),
+        amount,
+        time: Date.now(),
+      };
+      const history = JSON.parse(localStorage.getItem("history") || "[]");
+      history.push(tx);
+      localStorage.setItem("history", JSON.stringify(history));
+      localStorage.setItem("lastPurchase", JSON.stringify(tx));
 
-    navigate("/success");
-    // } else {
-    // alert(res.error);
-    // }
-    // });
+      navigate("/success");
+      // } else {
+      // alert(res.error);
+      // }
+      // });
+    } catch (error) {
+      errors.general =
+        "Произошла ошибка при отправке подарка. Попробуйте еще раз.";
+    } finally {
+      loading = false;
+    }
   }
 </script>
 
@@ -49,11 +82,43 @@
   <RippleButton onClick={() => navigate("/")}><ArrowLeft /></RippleButton>
   <h2 style="display: inline;">Подарок Другу</h2>
 </div>
-<input placeholder="Username" autocomplete="off" name="username" type="text" />
+
+<div style="margin-bottom: 16px;">
+  <input
+    placeholder="Username"
+    autocomplete="off"
+    name="username"
+    type="text"
+    bind:value={usernameInput}
+    class:error={errors.username}
+    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;"
+  />
+  {#if errors.username}
+    <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
+      {errors.username}
+    </div>
+  {/if}
+</div>
+
 {#if toId}
   <UsernameDisplay username={username || `#${toId}`} />
 {/if}
+
 <AmountPicker onSelect={(val) => (amount = val)} />
+{#if errors.amount}
+  <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
+    {errors.amount}
+  </div>
+{/if}
+
+{#if errors.general}
+  <div
+    style="color: #e74c3c; font-size: 14px; margin: 8px 0; padding: 8px; background: #fdf2f2; border-radius: 4px;"
+  >
+    {errors.general}
+  </div>
+{/if}
+
 <RippleButton
   disabled={loading}
   kind="buy"
@@ -66,3 +131,9 @@
 {#if loading}
   <LoadingOverlay />
 {/if}
+
+<style>
+  .error {
+    border-color: #e74c3c !important;
+  }
+</style>

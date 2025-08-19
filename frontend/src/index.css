@@ -212,6 +212,26 @@ button:active {
   width: 100%;
   max-height: 300px;
   overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 42, 187, 0.5) transparent;
+}
+
+.history__container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history__container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.history__container::-webkit-scrollbar-thumb {
+  background: rgba(139, 42, 187, 0.5);
+  border-radius: 3px;
+}
+
+.history__container::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 42, 187, 0.7);
 }
 
 @keyframes gift-gradient {
