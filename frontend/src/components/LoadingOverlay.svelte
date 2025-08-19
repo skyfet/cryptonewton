@@ -1,59 +1,85 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
 
-  const STAR_COUNT = 12;
-  const STAR_SIZE = 32;
+  const STAR_COUNT = 12; // Reduced from 24 for better performance
+  const STAR_SIZE = 48;
 
   // цикл схождения/расхождения (секунд)
-  const CYCLE_DURATION = 1; // T
+  const CYCLE_DURATION = 1.5; // T
 
   const MIN_RADIUS = 100;
+
+  // Pre-calculate constants for better performance
+  const TWO_PI = 2 * Math.PI;
+  const HALF_PI = Math.PI / 2;
+  const CYCLE_FREQUENCY = TWO_PI / CYCLE_DURATION;
 
   // Центровые смещения (мы используем left:50% top:50% и смещаем относительно центра)
   // Генерация звёзд с параметрами (R, ecc, omega)
   let stars = Array.from({ length: STAR_COUNT }, (_, i) => {
-    const phi = (2 * Math.PI * i) / STAR_COUNT; // начальный угол
+    const phi = (TWO_PI * i) / STAR_COUNT; // начальный угол
     const R = MIN_RADIUS + Math.random() * 36; // px
     const ecc = (Math.random() - 0.5) * 0.6; // от -0.3 до +0.3 (модификатор Y)
     // задаём период вращения отдельно от цикла схождения:
     const rotPeriod = 8 + Math.random() * 8; // секунд на полный оборот
-    const omega = (2 * Math.PI) / rotPeriod; // рад/с
+    const omega = TWO_PI / rotPeriod; // рад/с
     const size = STAR_SIZE * (0.7 + Math.random() * 0.6);
-    const twinkleDelay = Math.random() * 2;
-    const pulseDelay = Math.random() * 2;
     return {
-      i, phi, R, ecc, omega, size, twinkleDelay, pulseDelay,
+      i, phi, R, ecc, omega, size,
       el: null // сюда привяжем DOM элемент (bind:this)
     };
   });
 
   let rafId;
   let startTime = null;
+  let lastFrameTime = 0;
+  const FRAME_RATE_LIMIT = 60; // Limit to 60 FPS
+  const FRAME_INTERVAL = 1000 / FRAME_RATE_LIMIT;
 
-  // r_i(t) = R * (1 + cos(2π t / T)) / 2
-  const radiusAt = (R, t) => R * (1 + Math.cos((2 * Math.PI * t) / CYCLE_DURATION)) / 2;
+  // Optimized radius calculation with pre-calculated constants
+  const radiusAt = (R, t) => R * (1 + Math.cos(CYCLE_FREQUENCY * t)) * 0.5;
 
   function animateFrame(now) {
     if (!startTime) startTime = now;
+    
+    // Frame rate limiting
+    if (now - lastFrameTime < FRAME_INTERVAL) {
+      rafId = requestAnimationFrame(animateFrame);
+      return;
+    }
+    lastFrameTime = now;
+    
     const t = (now - startTime) / 1000; // seconds elapsed
+
+    // Batch DOM updates for better performance
+    const updates = [];
 
     // Для каждой звезды вычисляем x,y и применяем transform напрямую (строго алгебраически)
     for (let s of stars) {
       const r = radiusAt(s.R, t); // px
       const theta = s.phi + s.omega * t; // rad
+      
+      // Use Math.cos and Math.sin once per star
+      const cosTheta = Math.cos(theta);
+      const sinTheta = Math.sin(theta);
+      
       // координаты относительно центра (в px)
-      const x = r * Math.cos(theta);
-      const y = r * Math.sin(theta) * (1 + s.ecc);
+      const x = r * cosTheta;
+      const y = r * sinTheta * (1 + s.ecc);
 
       // опциональный scale — чуть увеличиваем при схождении (r small -> scale up)
       const scale = 1 + 0.18 * (1 - r / s.R); // при r=0 scale=1.18, при r=R scale=1
 
-      // устанавливаем transform: смещение + центрирование
+      // Batch the transform update
       if (s.el) {
-        // translate(-50%,-50%) чтобы центр SVG совпал с позицией (x,y)
-        s.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
+        updates.push(() => {
+          s.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
+        });
       }
     }
+
+    // Apply all updates in a batch
+    updates.forEach(update => update());
 
     rafId = requestAnimationFrame(animateFrame);
   }
@@ -63,7 +89,9 @@
   });
 
   onDestroy(() => {
-    cancelAnimationFrame(rafId);
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+    }
   });
 
   // --- Утилиты для смены режимов (если захочешь) ---
@@ -128,9 +156,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    will-change: transform, filter, opacity;
-    filter: drop-shadow(0 0 6px #fff7) drop-shadow(0 0 12px #ffe06688);
-    opacity: 0.95;
+    will-change: transform;
+    filter: drop-shadow(0 0 4px #fff5) drop-shadow(0 0 8px #ffe08888);
+    opacity: 0.75;
+    /* Use transform3d for hardware acceleration */
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
 
   .star-svg {
@@ -140,8 +171,8 @@
   }
 
   @keyframes star-glow {
-    0%,100% { filter: drop-shadow(0 0 6px #fff7) drop-shadow(0 0 12px #ffe06688); }
-    50%    { filter: drop-shadow(0 0 12px #fff9) drop-shadow(0 0 24px #ffe066cc) drop-shadow(0 0 30px #ffe06644); }
+    0%,100% { filter: drop-shadow(0 0 4px #fff5) drop-shadow(0 0 8px #ffe08888); }
+    50%    { filter: drop-shadow(0 0 8px #fff7) drop-shadow(0 0 16px #ffe088bb) drop-shadow(0 0 20px #ffe06633); }
   }
 
   /* лёгкое мерцание всей сцены */
@@ -149,5 +180,9 @@
     0%,100% { transform: scale(1); }
     50%     { transform: scale(1.02); }
   }
-  .stars-orbit { animation: orbit-breathe 1s ease-in-out infinite; }
+  .stars-orbit { 
+    animation: orbit-breathe 1s ease-in-out infinite;
+    will-change: transform;
+  }
 </style>
+

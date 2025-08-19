@@ -33,7 +33,7 @@
       errors.amount = "Минимальная сумма подарка: 1 звезда";
     } else if (amount > 1000) {
       errors.amount = "Максимальная сумма подарка: 1000 звёзд";
-    } else if (isNaN(amount)) {
+    } else if (Number.isNaN(amount)) {
       errors.amount = "Введите число";
     }
 

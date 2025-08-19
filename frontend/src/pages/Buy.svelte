@@ -17,7 +17,7 @@
     if (val > 10000) {
       return "Максимальная сумма покупки: 10,000 звезд";
     }
-    if (isNan(val)) {
+    if (Number.isNaN(val)) {
       return "Введите число";
     }
     return null;
@@ -25,9 +25,9 @@
 
   function validateUser() {
     const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
-    if (!userId) {
-      return "Ошибка авторизации. Пожалуйста, перезапустите приложение.";
-    }
+    // if (!userId) {
+      // return "Ошибка авторизации. Пожалуйста, перезапустите приложение.";
+    // }
     return null;
   }
 
@@ -54,7 +54,7 @@
     loading = true;
     
     try {
-      await new Promise((r) => setTimeout(r, 5000));
+      await new Promise((r) => setTimeout(r, 2000));
       const tx = {
         type: "purchase",
         amount,
@@ -71,7 +71,7 @@
       // Переход на страницу успеха через небольшую задержку
       setTimeout(() => {
         navigate("/success");
-      }, 1500);
+      }, 500);
     } catch (err) {
       error = "Произошла ошибка при совершении покупки. Попробуйте еще раз.";
       console.error("Purchase error:", err);

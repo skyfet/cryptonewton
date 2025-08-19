@@ -10,7 +10,7 @@
 </script>
 
 <div class="container">
-  <div style="padding: 42px;  overflow: hidden;">
+  <div style="padding: 42px 8px;  overflow: hidden;">
     {#if purchase}
       <h2 class="success">💫 Ваши звёзды в пути!</h2>
       <div>

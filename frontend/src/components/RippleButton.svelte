@@ -25,7 +25,7 @@
       <span
         class="ripple"
         style="width:{r.size}px;height:{r.size}px;top:{r.y}px;left:{r.x}px;"
-      />
+      ></span>
     {/each}
   </span>
 </button>
