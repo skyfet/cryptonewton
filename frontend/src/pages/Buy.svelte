@@ -11,7 +11,7 @@
   let success = "";
 
   function validateAmount(val) {
-    if (!val || val < 1) {
+    if (!val || val < 1 || typeof val !== "number" || isNaN(val)) {
       return "Минимальная сумма покупки: 1 звезда";
     }
     if (val > 10000) {
