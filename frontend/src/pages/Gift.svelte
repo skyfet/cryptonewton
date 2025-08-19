@@ -29,7 +29,7 @@
     }
 
     // Validate amount
-    if (!amount || amount < 1) {
+    if (!amount || amount < 1 ||  typeof amount !== "number" || isNaN(amount)) {
       errors.amount = "Выберите сумму подарка";
     } else if (amount > 1000) {
       errors.amount = "Максимальная сумма подарка 1000";
