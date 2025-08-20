@@ -67,7 +67,7 @@ export async function getHistory(user_id) {
     // Fallback для локального тестирования
     console.log('Using mock history API');
     return mockTransactions.filter(tx =>
-      tx.user_id === user_id || tx.from_id === user_id || tx.to_id === user_id
+      tx.user_id === user_id || tx.from_id === user_id
     );
   }
 }
@@ -76,6 +76,7 @@ export async function getProfile(username) {
   try {
     const url = `${API_BASE}/get-profile?username=${encodeURIComponent(username)}`
     const res = await fetch(url)
+    console.log(res)
     if (!res.ok) return null
     return res.json()
   } catch (error) {

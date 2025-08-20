@@ -3,6 +3,7 @@ module.exports = function userSharedHandler(bot, msg) {
 
   bot.getChat(user_id)
     .then((user) => {
+      console.log(user)
       const full_name = [user.first_name, user.last_name].filter(Boolean).join(' ');
       bot.sendMessage(msg.chat.id, 'Пользователь выбран!', {
         reply_markup: {

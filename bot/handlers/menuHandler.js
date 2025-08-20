@@ -10,15 +10,11 @@ module.exports = function menuHandler(bot, msg) {
             web_app: { url: 'https://skyfet.github.io/cryptonewton/#/buy' }
           }
         ],
-        // [
-        //   {
-        //     text: '🎁 Подарить другу',
-        //     request_user: {
-        //       request_id: 1,
-        //       user_is_bot: false
-        //     }
-        //   }
-        // ],
+        [
+          {
+            text: '🎁 Подарить другу'
+          }
+        ],
         [
           {
             text: '🛟 Поддержка'
