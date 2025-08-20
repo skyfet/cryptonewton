@@ -24,27 +24,12 @@
     return null;
   }
 
-  function validateUser() {
-    const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id;
-    if (!userId) {
-      return "Ошибка авторизации. Пожалуйста, перезапустите приложение.";
-    }
-    return null;
-  }
+
 
   async function confirm() {
     // Очищаем предыдущие сообщения
     error = "";
     success = "";
-
-    if (amount !== 888) {
-      // Валидация пользователя
-      const userError = validateUser();
-      if (userError) {
-        error = userError;
-        return;
-      }
-    }
 
     // Валидация суммы
     const amountError = validateAmount(amount);

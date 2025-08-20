@@ -123,12 +123,6 @@
     errors.general = null;
 
     try {
-      if ((amount !== 888 && !fromId) || !foundUser || amount < 1) {
-        console.log("validation failed in confirm");
-        errors.general = "Ошибка авторизации или неверные данные";
-        return;
-      }
-
       console.log("calling gift API with:", {
         fromId,
         toId: foundUser.id,
