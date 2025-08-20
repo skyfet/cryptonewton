@@ -18,7 +18,12 @@
   }
 </script>
 
-<button class="ripple-btn {kind}" on:click={createRipple} {disabled}>
+<button
+type="submit"
+  class="ripple-btn {kind}"
+  on:click={createRipple}
+  {disabled}
+>
   <slot></slot>
   <span class="ripple-box">
     {#each ripples as r (r.key)}
@@ -32,8 +37,6 @@
 
 <style>
   .ripple-btn {
-    width: 64px;
-    height: 64px;
     padding: 12px;
     position: relative;
     overflow: hidden;
@@ -45,20 +48,28 @@
     font-weight: 600;
     transition: background 0.3s;
   }
+
+  .ripple-btn.home,
+  .ripple-btn.gift,
   .ripple-btn.buy {
+    height: 64px;
     min-width: 300px;
     max-width: 100%;
-    background: linear-gradient(45deg, #00ffee88, #32046388, #eeaaffbb);
+  }
+  .ripple-btn.gift,
+  .ripple-btn.buy {
     background-size: 200% 200%;
     animation: gift-gradient 8s linear infinite;
   }
-  .ripple-btn.gift {
-    min-width: 300px;
-    max-width: 100%;
-    background: linear-gradient(30deg, #fcac0daa, #f14536aa, #ec7c32bb);
-    background-size: 200% 200%;
-    animation: gift-gradient 4s linear infinite;
+
+  .ripple-btn.buy {
+    background: linear-gradient(45deg, #00ffee88, #32046388, #eeaaffbb);
   }
+
+  .ripple-btn.gift {
+    background: linear-gradient(30deg, #fcac0daa, #f14536aa, #ec7c32bb);
+  }
+
   .ripple-box {
     pointer-events: none;
     position: absolute;

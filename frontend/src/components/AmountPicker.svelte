@@ -14,7 +14,7 @@
 
   function focusAmountInput() {
     console.log(amountInput);
-    setTimeout(()=> amountInput.focus(), 100);
+    setTimeout(() => amountInput.focus(), 100);
   }
 
   $: if (amountInput) focusAmountInput();
@@ -50,16 +50,16 @@
 </div>
 <br />
 {#if selected != "custom"}
-<button
-class="amount {selected === 'custom' ? 'selected' : ''}"
-on:click={() => choose("custom")}
->
-Своя сумма
-</button>
-<br />
+  <button
+    class="amount {selected === 'custom' ? 'selected' : ''}"
+    on:click={() => choose("custom")}
+  >
+    Своя сумма
+  </button>
 {/if}
-<div style="position: relative;">
-  {#if selected === "custom"}
+
+{#if selected === "custom"}
+  <div style="position: relative;">
     <input
       class="amount"
       name="amount"
@@ -75,5 +75,6 @@ on:click={() => choose("custom")}
       class="star {selected === 'custom' ? 'sparkle' : ''}"
       >{selected === "custom" && custom ? "🌟" : "⭐"}</span
     >
-  {/if}
-</div>
+  </div>
+{/if}
+<br />

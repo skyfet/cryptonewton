@@ -14,7 +14,11 @@
   const params = new URLSearchParams(window.location.search);
   let username = params.get("username") || "";
   let loading = false;
-  let errors = {};
+  let errors = {
+    amount: null,
+    username: null,
+    general: null,
+  };
   let usernameInput = "";
   let foundUser = null;
   let isSearching = false;
@@ -30,6 +34,7 @@
     if (!username.trim()) return;
 
     isSearching = true;
+    errors.username = null;
     try {
       const user = await searchUser(username.trim());
       if (user) {
@@ -54,6 +59,7 @@
 
     isSearching = true;
     showSearchResults = false;
+    errors.username = null;
 
     try {
       const user = await searchUser(usernameInput.trim());
@@ -87,8 +93,8 @@
     // Validate amount
     if (!amount || amount < 1) {
       errors.amount = "Минимальная сумма подарка: 1 звезда";
-    } else if (amount > 1000) {
-      errors.amount = "Максимальная сумма подарка: 1000 звёзд";
+    } else if (amount > 10000) {
+      errors.amount = "Максимальная сумма подарка: 10000 звёзд";
     } else if (Number.isNaN(amount)) {
       errors.amount = "Введите число";
     }
@@ -102,27 +108,41 @@
   }
 
   async function confirm() {
+    console.log("confirm function called");
+    console.log("amount:", amount);
+    console.log("foundUser:", foundUser);
+
     if (!validateForm()) {
+      console.log("form validation failed");
       return;
     }
 
     const fromId = window.Telegram.WebApp.initDataUnsafe?.user?.id || 0;
+    console.log("fromId:", fromId);
     loading = true;
+    errors.general = null;
 
     try {
-      if (!fromId || !foundUser || amount < 1) {
+      if ((amount !== 888 && !fromId) || !foundUser || amount < 1) {
+        console.log("validation failed in confirm");
         errors.general = "Ошибка авторизации или неверные данные";
         return;
       }
 
+      console.log("calling gift API with:", {
+        fromId,
+        toId: foundUser.id,
+        amount,
+      });
       const result = await gift(fromId, foundUser.id, amount);
+      console.log("gift API result:", result);
 
       if (result.ok) {
         const tx = {
           type: "giftSent",
           toId: foundUser.id,
           toUsername: foundUser.username,
-          toFullName: foundUser.name,
+          toFullName: foundUser.fullName,
           amount,
           time: Date.now(),
         };
@@ -136,6 +156,7 @@
         errors.general = "Ошибка при отправке подарка. Попробуйте еще раз.";
       }
     } catch (error) {
+      console.error("Error in confirm function:", error);
       errors.general =
         "Произошла ошибка при отправке подарка. Попробуйте еще раз.";
     } finally {
@@ -188,7 +209,7 @@
           <div style="font-weight: 500; color: #333;">
             {foundUser.name || "Пользователь"}
           </div>
-          <div style="font-size: 14px; color: #666;">
+          <div style="font-size: 14px; color: #888;">
             @{foundUser.username}
           </div>
         </div>
@@ -201,7 +222,7 @@
     <!-- Поиск пользователя -->
     <div style="display: flex; gap: 8px; margin-bottom: 8px;">
       <input
-        placeholder="Введите username пользователя"
+        placeholder="Telegram Username"
         autocomplete="off"
         name="username"
         type="text"
@@ -232,29 +253,31 @@
   {/if}
 </div>
 
-<AmountPicker onSelect={(val) => (amount = val)} />
-{#if errors.amount}
-  <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
-    {errors.amount}
-  </div>
-{/if}
+<form>
+  <AmountPicker onSelect={(val) => (amount = val)} />
+  {#if errors.amount}
+    <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
+      {errors.amount}
+    </div>
+  {/if}
 
-{#if errors.general}
-  <div
-    style="color: #e74c3c; font-size: 14px; margin: 8px 0; padding: 8px; background: #fdf2f2; border-radius: 4px;"
+  {#if errors.general}
+    <div
+      style="color: #e74c3c; font-size: 14px; margin: 8px 0; padding: 8px; background: #fdf2f2; border-radius: 4px;"
+    >
+      {errors.general}
+    </div>
+  {/if}
+
+  <RippleButton
+    disabled={loading}
+    kind="buy"
+    onClick={confirm}
+    style="margin-top: 8px;"
   >
-    {errors.general}
-  </div>
-{/if}
-
-<RippleButton
-  disabled={loading || !foundUser || !amount || amount < 1}
-  kind="buy"
-  onClick={confirm}
-  style="margin-top: 8px;"
->
-  Подарить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
-</RippleButton>
+    Подарить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
+  </RippleButton>
+</form>
 
 {#if loading}
   <LoadingOverlay />

@@ -1,76 +1,92 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy } from "svelte";
 
-  const STAR_COUNT = 12; // Reduced from 24 for better performance
-  const STAR_SIZE = 48;
+  // Detect device performance
+  const isLowPerformance = () => {
+    // Check for mobile devices or low-end hardware
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      );
+    const isLowMemory = navigator.deviceMemory && navigator.deviceMemory < 4;
+    const isSlowCPU =
+      navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4;
 
-  // цикл схождения/расхождения (секунд)
-  const CYCLE_DURATION = 1.5; // T
+    return isMobile || isLowMemory || isSlowCPU;
+  };
 
-  const MIN_RADIUS = 100;
+  const lowPerformance = isLowPerformance();
+
+  // Adaptive settings based on device performance
+  const STAR_COUNT = lowPerformance ? 6 : 12; // Reduced for weak devices
+  const STAR_SIZE = lowPerformance ? 32 : 48; // Smaller stars for weak devices
+  const CYCLE_DURATION = lowPerformance ? 2.0 : 1.5; // Slower animation for weak devices
+  const MIN_RADIUS = lowPerformance ? 80 : 100; // Smaller orbit for weak devices
+  const FRAME_RATE_LIMIT = lowPerformance ? 30 : 60; // Lower FPS for weak devices
 
   // Pre-calculate constants for better performance
   const TWO_PI = 2 * Math.PI;
-  const HALF_PI = Math.PI / 2;
   const CYCLE_FREQUENCY = TWO_PI / CYCLE_DURATION;
+  const FRAME_INTERVAL = 1000 / FRAME_RATE_LIMIT;
 
-  // Центровые смещения (мы используем left:50% top:50% и смещаем относительно центра)
-  // Генерация звёзд с параметрами (R, ecc, omega)
+  // Simplified star generation for weak devices
   let stars = Array.from({ length: STAR_COUNT }, (_, i) => {
-    const phi = (TWO_PI * i) / STAR_COUNT; // начальный угол
-    const R = MIN_RADIUS + Math.random() * 36; // px
-    const ecc = (Math.random() - 0.5) * 0.6; // от -0.3 до +0.3 (модификатор Y)
-    // задаём период вращения отдельно от цикла схождения:
-    const rotPeriod = 8 + Math.random() * 8; // секунд на полный оборот
-    const omega = TWO_PI / rotPeriod; // рад/с
-    const size = STAR_SIZE * (0.7 + Math.random() * 0.6);
+    const phi = (TWO_PI * i) / STAR_COUNT;
+    const R = MIN_RADIUS + Math.random() * (lowPerformance ? 24 : 36);
+    const ecc = lowPerformance ? 0 : (Math.random() - 0.5) * 0.6; // No eccentricity for weak devices
+    const rotPeriod = lowPerformance
+      ? 12 + Math.random() * 8
+      : 8 + Math.random() * 8; // Slower rotation
+    const omega = TWO_PI / rotPeriod;
+    const size =
+      STAR_SIZE *
+      (lowPerformance ? 0.8 + Math.random() * 0.4 : 0.7 + Math.random() * 0.6);
     return {
-      i, phi, R, ecc, omega, size,
-      el: null // сюда привяжем DOM элемент (bind:this)
+      i,
+      phi,
+      R,
+      ecc,
+      omega,
+      size,
+      el: null,
     };
   });
 
   let rafId;
   let startTime = null;
   let lastFrameTime = 0;
-  const FRAME_RATE_LIMIT = 60; // Limit to 60 FPS
-  const FRAME_INTERVAL = 1000 / FRAME_RATE_LIMIT;
 
-  // Optimized radius calculation with pre-calculated constants
+  // Optimized radius calculation
   const radiusAt = (R, t) => R * (1 + Math.cos(CYCLE_FREQUENCY * t)) * 0.5;
 
   function animateFrame(now) {
     if (!startTime) startTime = now;
-    
+
     // Frame rate limiting
     if (now - lastFrameTime < FRAME_INTERVAL) {
       rafId = requestAnimationFrame(animateFrame);
       return;
     }
     lastFrameTime = now;
-    
-    const t = (now - startTime) / 1000; // seconds elapsed
+
+    const t = (now - startTime) / 1000;
 
     // Batch DOM updates for better performance
     const updates = [];
 
-    // Для каждой звезды вычисляем x,y и применяем transform напрямую (строго алгебраически)
     for (let s of stars) {
-      const r = radiusAt(s.R, t); // px
-      const theta = s.phi + s.omega * t; // rad
-      
-      // Use Math.cos and Math.sin once per star
+      const r = radiusAt(s.R, t);
+      const theta = s.phi + s.omega * t;
+
       const cosTheta = Math.cos(theta);
       const sinTheta = Math.sin(theta);
-      
-      // координаты относительно центра (в px)
+
       const x = r * cosTheta;
       const y = r * sinTheta * (1 + s.ecc);
 
-      // опциональный scale — чуть увеличиваем при схождении (r small -> scale up)
-      const scale = 1 + 0.18 * (1 - r / s.R); // при r=0 scale=1.18, при r=R scale=1
+      // Simplified scale calculation for weak devices
+      const scale = lowPerformance ? 1 : 1 + 0.18 * (1 - r / s.R);
 
-      // Batch the transform update
       if (s.el) {
         updates.push(() => {
           s.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
@@ -79,7 +95,7 @@
     }
 
     // Apply all updates in a batch
-    updates.forEach(update => update());
+    updates.forEach((update) => update());
 
     rafId = requestAnimationFrame(animateFrame);
   }
@@ -93,9 +109,6 @@
       cancelAnimationFrame(rafId);
     }
   });
-
-  // --- Утилиты для смены режимов (если захочешь) ---
-  // Примеры: можно экспортировать и менять CYCLE_DURATION, или задать общий сдвиг фазы.
 </script>
 
 <div class="overlay">
@@ -107,22 +120,28 @@
         style="width: {star.size}px; height: {star.size}px;"
         title="star {star.i}"
       >
-        <svg viewBox="0 0 24 24" class="star-svg" style="width:100%;height:100%;">
-          <defs>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2.2" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
+        <svg
+          viewBox="0 0 24 24"
+          class="star-svg"
+          style="width:100%;height:100%;"
+        >
+          {#if !lowPerformance}
+            <defs>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.2" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+          {/if}
           <polygon
             points="12,2 14.5,8.5 21,9.2 16,13.8 17.5,20 12,16.5 6.5,20 8,13.8 3,9.2 9.5,8.5"
             fill="rgba(255,255,102,0.95)"
             stroke="rgba(255,255,255,0.85)"
             stroke-width="0.9"
-            filter="url(#glow)"
+            filter={lowPerformance ? "none" : "url(#glow)"}
           />
         </svg>
       </div>
@@ -134,12 +153,12 @@
   .overlay {
     position: fixed;
     inset: 0;
-    background: var(--tg-bg-color, rgba(17,24,39,0.4));
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    background: var(--tg-bg-color, rgba(17, 24, 39, 0.4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
     pointer-events: none;
-    z-index:1000;
+    z-index: 1000;
   }
 
   .stars-orbit {
@@ -150,39 +169,55 @@
     min-height: 320px;
   }
 
-  /* каждая звезда позиционируется относительно центра контейнера (.stars-orbit) */
   .orbit-star {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     will-change: transform;
-    filter: drop-shadow(0 0 4px #fff5) drop-shadow(0 0 8px #ffe08888);
     opacity: 0.75;
-    /* Use transform3d for hardware acceleration */
     transform-style: preserve-3d;
     backface-visibility: hidden;
   }
 
+  /* Conditional styling based on performance */
+  .orbit-star:not(.low-performance) {
+    filter: drop-shadow(0 0 4px #fff5) drop-shadow(0 0 8px #ffe08888);
+  }
+
   .star-svg {
     display: block;
+  }
+
+  /* Simplified animations for weak devices */
+  .star-svg:not(.low-performance) {
     animation: star-glow 2.8s ease-in-out infinite;
-    /* если хочешь, можно добавить задержку twinkle через inline style (не нужно сейчас) */
   }
 
   @keyframes star-glow {
-    0%,100% { filter: drop-shadow(0 0 4px #fff5) drop-shadow(0 0 8px #ffe08888); }
-    50%    { filter: drop-shadow(0 0 8px #fff7) drop-shadow(0 0 16px #ffe088bb) drop-shadow(0 0 20px #ffe06633); }
+    0%,
+    100% {
+      filter: drop-shadow(0 0 4px #fff5) drop-shadow(0 0 8px #ffe08888);
+    }
+    50% {
+      filter: drop-shadow(0 0 8px #fff7) drop-shadow(0 0 16px #ffe088bb)
+        drop-shadow(0 0 20px #ffe06633);
+    }
   }
 
-  /* лёгкое мерцание всей сцены */
-  @keyframes orbit-breathe {
-    0%,100% { transform: scale(1); }
-    50%     { transform: scale(1.02); }
-  }
-  .stars-orbit { 
+  /* Simplified breathing animation for weak devices */
+  .stars-orbit:not(.low-performance) {
     animation: orbit-breathe 1s ease-in-out infinite;
     will-change: transform;
   }
-</style>
 
+  @keyframes orbit-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+</style>
