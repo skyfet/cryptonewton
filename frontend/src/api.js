@@ -42,7 +42,7 @@ export async function gift(from_id, to_id, amount) {
   } catch (error) {
     // Fallback для локального тестирования
     console.log('Using mock gift API');
-    if ((amount!== 888 && !from_id) || !to_id || !amount || amount < 1 || amount > 1000) {
+    if (!to_id || !amount || amount < 1 || amount > 1000) {
       return { ok: false, error: 'Invalid parameters' };
     }
 
