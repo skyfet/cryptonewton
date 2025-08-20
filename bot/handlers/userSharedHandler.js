@@ -14,14 +14,7 @@ module.exports = function userSharedHandler(bot, msg) {
       });
     })
     .catch((_) => {
-      bot.sendMessage(msg.chat.id, 'Пользователь выбран!', {
-        reply_markup: {
-          inline_keyboard: [[{
-            text: '🎁 Отправить подарок',
-            web_app: { url: `https://skyfet.github.io/cryptonewton/#/gift?user_id=${user_id}` }
-          }]]
-        }
-      });
+      bot.sendMessage(msg.chat.id, 'Этот пользователь не использует бота!');
     });
 
 

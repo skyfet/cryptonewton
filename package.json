@@ -18,7 +18,8 @@
     "express": "^4.19.2",
     "node-html-parser": "^7.0.1",
     "node-telegram-bot-api": "^0.66.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "jest": "^30.0.3",

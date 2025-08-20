@@ -3,6 +3,8 @@ const menuHandler = require('./handlers/menuHandler');
 const userSharedHandler = require('./handlers/userSharedHandler');
 const app = require('./server');
 
+require('dotenv').config();
+
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 

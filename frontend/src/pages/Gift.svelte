@@ -253,31 +253,29 @@
   {/if}
 </div>
 
-<form>
-  <AmountPicker onSelect={(val) => (amount = val)} />
-  {#if errors.amount}
-    <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
-      {errors.amount}
-    </div>
-  {/if}
+<AmountPicker onSelect={(val) => (amount = val)} />
+{#if errors.amount}
+  <div style="color: #e74c3c; font-size: 14px; margin-top: 4px;">
+    {errors.amount}
+  </div>
+{/if}
 
-  {#if errors.general}
-    <div
-      style="color: #e74c3c; font-size: 14px; margin: 8px 0; padding: 8px; background: #fdf2f2; border-radius: 4px;"
-    >
-      {errors.general}
-    </div>
-  {/if}
-
-  <RippleButton
-    disabled={loading}
-    kind="buy"
-    onClick={confirm}
-    style="margin-top: 8px;"
+{#if errors.general}
+  <div
+    style="color: #e74c3c; font-size: 14px; margin: 8px 0; padding: 8px; background: #fdf2f2; border-radius: 4px;"
   >
-    Подарить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
-  </RippleButton>
-</form>
+    {errors.general}
+  </div>
+{/if}
+
+<RippleButton
+  disabled={loading}
+  kind="buy"
+  onClick={confirm}
+  style="margin-top: 8px;"
+>
+  Подарить{parseInt(amount) || 0 ? " за " + amount * PRICE_RUB + "₽" : ""}
+</RippleButton>
 
 {#if loading}
   <LoadingOverlay />
